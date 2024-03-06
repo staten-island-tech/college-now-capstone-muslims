@@ -13,12 +13,12 @@ router.get("/", (req, res) => {
     console.log(err);
   }
 });
-router.get("/teacher/:name", (req, res) => {
+/*router.get("/teacher/:name", (req, res) => {
   //try the url /teacher/whalen
   try {
     res.json(req.params.name);
   } catch (err) {
     console.log(err);
   }
-});
+}); */
 module.exports = router;
