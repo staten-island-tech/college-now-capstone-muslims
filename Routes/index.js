@@ -1,9 +1,15 @@
 const express = require("express");
 const router = new express.Router();
-const shopController = require("../Controllers/shopController");
-router.get("/", shopController.homePage); //middlware runs, then when complete, calls next part of requst
-router.post("/add", shopController.createShop);
-router.get("/shops", shopController.getShops);
-router.patch("/shops/:id", shopController.updateShop);
-router.delete("/shops/:id", shopController.deleteShop);
+const profileController = require("../Controllers/profileController");
+const postController = require("../Controller/postController");
+
+router.post("/add", profileController.createProfile);
+router.get("/profiles", profileController.getProfiles);
+router.patch("/profiles/:id", profileController.updateProfile);
+router.delete("/profiles/:id", profileController.deleteProfile);
+
+router.post("/add", postController.createPost);
+router.get("/posts", postController.getPosts);
+router.patch("/posts/:id", postController.updatePost);
+router.delete("/posts/:id", postController.deletePost);
 module.exports = router;
