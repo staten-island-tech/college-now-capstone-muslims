@@ -21,10 +21,10 @@ const userSchema = new mongoose.Schema({
     required: "Please at least an email or a phone number",
   },
   profilePicture: {
-    type: Image,
+    type: Buffer,
   },
   petPictures: {
-    type: Image,
+    type: Buffer,
   },
   slug: String,
 });

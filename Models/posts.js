@@ -17,7 +17,7 @@ const petSchema = new mongoose.Schema({
     required: "Please enter a the owner's name",
   },
   petPictures: {
-    type: Image,
+    type: Buffer,
   },
   location: {
     type: String,
