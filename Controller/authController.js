@@ -35,9 +35,6 @@ exports.register = async function (req, res) {
             age: req.body.age,
             location: req.body.location
           });
-    }
-
-
     const token = await generateToken(newUser);
     newUser.save(function (err) {
       if (err) {
@@ -57,8 +54,7 @@ exports.register = async function (req, res) {
       newUser,
       token,
     });
-  }
-};
+  }};
 
 exports.login = async (req, res) => {
   try {
