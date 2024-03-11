@@ -12,16 +12,14 @@ const generateToken = async function (user) {
 
 exports.register = async function (req, res) {
   if (!req.body.username || !req.body.password) {
-    res.json({ success: false, msg: "Please pass username and password." });
+    res.json({ success: false, msg: "Please enter username and password." });
   } else {
-    console.log(req.body.password);
     let newUser = new User({
       username: req.body.username,
       password: req.body.password,
     });
     const token = await generateToken(newUser);
-    // save the user
-    /* newUser.save(function (err) {
+    newUser.save(function (err) {
       if (err) {
         return res.json({ success: false, msg: "Username already exists." });
       }
@@ -31,11 +29,11 @@ exports.register = async function (req, res) {
         newUser,
         token,
       });
-    }); */
+    });
     await newUser.save();
     res.json({
       success: true,
-      msg: "Successful created new user.",
+      msg: "Successfully created new user.",
       newUser,
       token,
     });
@@ -47,24 +45,22 @@ exports.login = async (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     const user = await User.findOne({ username });
-
     if (!user) {
-      throw new Error("Unable to login");
+      throw new Error("User is not found");
     }
-
-    const isMatch = await bcrypt.compare(password, user.password);
+    const pwMatch = await bcrypt.compare(password, user.password);
     const token = await generateToken(user);
-    if (!isMatch) {
-      throw new Error("Unable to login");
+    if (!pwMatch) {
+      throw new Error("Wrong password. Try again or click Forgot password to reset it.");
     }
     //DO NOT SEND BACK Password
-
-    res.send({ user, token });
+    let dataSent = ({ user.username, user.password });
+    res.send({ dataSent, token });
   } catch (error) {
-    console.log(error);
-    res.status(400).send("user not found");
+    res.status(404).send("user not found");
   }
 };
+
 exports.authCheck = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
@@ -72,7 +68,6 @@ exports.authCheck = async (req, res, next) => {
     const user = await User.findOne({
       _id: decoded._id,
     });
-
     if (!user) {
       throw new Error();
     }
