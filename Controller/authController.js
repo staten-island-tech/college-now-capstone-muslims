@@ -36,17 +36,6 @@ exports.register = async function (req, res) {
             location: req.body.location
           });
     const token = await generateToken(newUser);
-    newUser.save(function (err) {
-      if (err) {
-        return res.json({ success: false, msg: "Username already exists." });
-      }
-      res.json({
-        success: true,
-        msg: "Successful created new user.",
-        newUser,
-        token,
-      });
-    });
     await newUser.save();
     res.json({
       success: true,
@@ -69,8 +58,7 @@ exports.login = async (req, res) => {
     if (!pwMatch) {
       throw new Error("Wrong password. Try again or click Forgot password to reset it.");
     }
-    //DO NOT SEND BACK Password
-    let dataSent = ({ user.username, user.password });
+    let dataSent = ({ user.email, user.username, user.age, user.location});
     res.send({ dataSent, token });
   } catch (error) {
     res.status(404).send("user not found");
@@ -88,12 +76,13 @@ exports.authCheck = async (req, res, next) => {
       throw new Error();
     }
     req.token = token;
-    req.user = user; //route hanlder now will not have to fetch the user account
+    req.user = user
     next();
   } catch (e) {
     res.status(401).send({ error: "Please authenticate." });
   }
 };
+
 exports.protected = async (req, res) => {
   let user = req.user;
   try {
