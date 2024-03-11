@@ -11,13 +11,33 @@ const generateToken = async function (user) {
 };
 
 exports.register = async function (req, res) {
-  if (!req.body.username || !req.body.password) {
-    res.json({ success: false, msg: "Please enter username and password." });
-  } else {
-    let newUser = new User({
-      username: req.body.username,
-      password: req.body.password,
-    });
+    if (!req.body.email) {
+        res.json({ success: false, msg: "Please enter an email." });
+    } else if (!req.body.username) {
+        res.json({ success: false, msg: "Please enter username." });
+    } else if (!req.body.password) {
+        res.json({ success: false, msg: "Please enter password."});
+    } else if (!req.body.confpassword) {
+        res.json({ success: false, msg: "Please confirm your password."});
+    } else if (req.bodyconfpassword != req.body.password) {
+        res.json({ success: false, msg: "Password does not match."});
+    } else if (!req.body.age) {
+        res.json({ success: false, msg: "Please enter your age." });
+    } else if (req.body.age < 18) {
+        res.json({ success: false, msg: "You must be over 18 to use this website." });
+    } else if (!req.body.location) {
+        res.json({ success: false, msg: "Please enter a location." });
+    } else {
+        let newUser = new User({
+            email: req.body.email,
+            username: req.body.username,
+            password: req.body.password,
+            age: req.body.age,
+            location: req.body.location
+          });
+    }
+
+
     const token = await generateToken(newUser);
     newUser.save(function (err) {
       if (err) {
