@@ -84,7 +84,7 @@ exports.authCheck = async (req, res, next) => {
       _id: decoded._id,
     });
     if (!user) {
-      throw new Error();
+      throw new Error("User not found.");
     }
     req.token = token;
     req.user = user;

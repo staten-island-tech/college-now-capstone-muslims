@@ -2,7 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const profileController = require("../Controller/profileController");
 const postController = require("../Controller/postController");
-const authController = require("../Controllers/authController");
+const authController = require("../Controller/authController");
 
 router.post("/add", profileController.createProfile);
 router.get("/profiles", profileController.getProfile);
