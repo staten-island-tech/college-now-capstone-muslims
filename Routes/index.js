@@ -17,4 +17,7 @@ router.delete("/posts/:id", postController.deletePost);
 router.post("/register", authController.register);
 router.post("/login", authController.login);
 router.get("/protected", authController.authCheck, authController.protected);
+
+router.post("/uploadTest", profileController.upload, profileController.homePage);
+router.post("/uploadTest", postController.upload, postController.homePage);
 module.exports = router;
