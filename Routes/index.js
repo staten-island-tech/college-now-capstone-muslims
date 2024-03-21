@@ -8,14 +8,14 @@ router.get("/", profileController.homePage);
 router.get("/", postController.homePage);
 
 router.post("/createProfile", profileController.createProfile);
-router.get("/profiles", profileController.getProfile);
-router.patch("/updateProfiles/:id", profileController.updateProfile);
-router.delete("/deleteProfiles/:id", profileController.deleteProfile);
+router.get("/profile", profileController.getProfile);
+router.patch("/updateProfile/:id", profileController.updateProfile);
+router.delete("/deleteProfile/:id", profileController.deleteProfile);
 
 router.post("/createPost", postController.createPost);
 router.get("/posts", postController.getPost);
-router.patch("/updatePosts/:id", postController.updatePost);
-router.delete("/deletePosts/:id", postController.deletePost);
+router.patch("/updatePost/:id", postController.updatePost);
+router.delete("/deletePost/:id", postController.deletePost);
 
 router.post("/register", authController.register);
 router.post("/login", authController.login);
