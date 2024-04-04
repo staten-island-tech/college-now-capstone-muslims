@@ -59,6 +59,4 @@ nav:hover .router:hover {
   box-shadow: 0 2px 0 0 currentColor;
 }
 
-.login {
-}
 </style>
