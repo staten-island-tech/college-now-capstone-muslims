@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <template>
   <div class="Posts">
     <Post
@@ -22,14 +22,4 @@ export default {
 </script>
 
 <style></style>
-=======
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
 
-<template>
-  <main>
-    <TheWelcome />
-  </main>
-</template>
->>>>>>> parent of d3f0c7f (.)
