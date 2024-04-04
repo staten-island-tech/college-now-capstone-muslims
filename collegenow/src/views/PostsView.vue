@@ -16,7 +16,6 @@
     ></RouterLink>
   </div>
   <!-- still need filters, the my profile, swiping to next pet, button to next photo -->
-  >
 </template>
 
 <script>
