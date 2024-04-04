@@ -5,6 +5,10 @@
       ><button><img src="" alt="" /></button
     ></RouterLink>
   </div>
+  <img class="slogan" src="" alt="" />
+  <RouterLink class="router" to="/login">
+    <button class="login">Login</button>
+  </RouterLink>
 </template>
 
 <script>
