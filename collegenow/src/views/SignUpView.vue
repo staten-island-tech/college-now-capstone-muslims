@@ -9,7 +9,7 @@
       <h2 class="text">Please enter your birthday</h2>
       <div class="age"><input type="date" /></div>
       <h2 class="text">Please enter your location (State and City)</h2>
-      <div class="location">/></div>
+      <div class="location"><input type="text" /></div>
       <h2 class="text">Password</h2>
       <div class="password">
         <input type="password" id="password" />
