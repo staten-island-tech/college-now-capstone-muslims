@@ -1,28 +1,14 @@
 <template>
-  <div class="Posts">
-    <Post 
-      Animal="Dog"
-      Description="OwnerUcheong"
-      Image=""
-    />
+  <img class="backgroundImage" src="" alt="" />
+  <div class="logo">
+    <RouterLink class="router" to="/"
+      ><button><img src="" alt="" /></button
+    ></RouterLink>
   </div>
 </template>
 
 <script>
-import Post from "../components/Post.vue"
-  export default {
-    name: "Posts",
-    components: {
-      Post,
-    },
-    data() {
-      return {
-        
-      };
-    },
-  }
+export default {};
 </script>
 
-<style>
-
-</style>
+<style lang="scss" scoped></style>
