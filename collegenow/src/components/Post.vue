@@ -1,7 +1,7 @@
 <template>
   <div class="post">
-    <p>{{ Name }}</p>
-    <p>{{ ownerName }}</p>
+    <h2>{{ Name }}</h2>
+    <h2>{{ ownerName }}</h2>
     <p>{{ number }}</p>
     <p>{{ Description }}</p>
     <img src="" alt="" />
