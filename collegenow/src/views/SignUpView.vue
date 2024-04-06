@@ -33,6 +33,8 @@
   </div>
 </template>
 
-<script></script>
+<script>
+// put a method for checking if they are above the age of 18
+</script>
 
 <style></style>

@@ -1,12 +1,4 @@
 <template>
-  <SwipeBox ref="myswipe" @onChange="mySwipeChanged" speed="150">
-    <img :src="image.url" />
-  </SwipeBox>
-
-  <button @click="next">next</button><br />
-  <button @click="previous">previous</button><br />
-  <button @click="goto2">goto index #2</button><br />
-
   <div class="Posts">
     <Post
       v-for="post in uploadedPhotos"
@@ -27,7 +19,8 @@
 </template>
 
 <script>
-import SwipeBox from "@shopid/vue3-swipe-box";
+import Vue3TouchEvents from "vue3-touch-events";
+Vue.use(Vue3TouchEvents);
 import Post from "../components/Post.vue";
 
 export default {
@@ -42,21 +35,7 @@ export default {
     };
   },
 
-  methods: {
-    mySwipeChanged: function (index) {
-      console.log("index" + index);
-    },
-
-    next: function (x) {
-      this.$refs.myswipe.swipetoNext();
-    },
-    previous: function (x) {
-      this.$refs.myswipe.swipetoPrevious();
-    },
-    goto2: function () {
-      this.$refs.myswipe.goTo(2);
-    },
-  },
+  methods: {},
 };
 </script>
 <style></style>
