@@ -9,6 +9,9 @@
   <RouterLink class="router" to="/login">
     <button class="login">Login</button>
   </RouterLink>
+  <RouterLink class="router" to="/signup">
+    <button class="signUp">Sign Up</button>
+  </RouterLink>
 </template>
 
 <script>

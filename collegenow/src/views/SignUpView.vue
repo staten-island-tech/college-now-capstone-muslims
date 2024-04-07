@@ -7,9 +7,9 @@
         <input type="email" id="email" />
       </div>
       <h2 class="text">Please enter your birthday</h2>
-      <div class="age"><input type="date" /></div>
+      <div class="age"><input type="date" v-model="userBirthdate" /></div>
       <h2 class="text">Please enter your location (State and City)</h2>
-      <div class="location"><input type="text" /></div>
+      <div class="location"><input type="select" /></div>
       <h2 class="text">Password</h2>
       <div class="password">
         <input type="password" id="password" />
@@ -34,7 +34,44 @@
 </template>
 
 <script>
-// put a method for checking if they are above the age of 18
+export default {
+  methods: {
+    calculateAge(birthdate) {
+      const today = new Date();
+      const birthDate = new Date(birthdate);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      return age;
+    },
+    async signup(e) {
+      e.preventDefault();
+      let userEmail = document.getElementById("email").value;
+      let userPassword = document.getElementById("password").value;
+      let confirmed = document.getElementById("confirm").value;
+      if (userEmail === "" || userPassword === "" || confirmed === "") {
+        alert("Please fill out all fields");
+      } else if (userPassword != confirmed) {
+        alert("Your confirmed password does not match");
+      } else if (userPassword.length <= 5) {
+        alert("Password must contain at least 6 characters");
+      } else if (18 > age) {
+        alert("You must be 18 years old or older to use the application");
+      } else {
+        await signUp(supabase, userEmail, confirmed);
+        authStore();
+        router.push("login");
+      }
+    },
+  },
+  data() {
+    return {
+      userBirthdate: null,
+    };
+  },
+};
 </script>
 
 <style></style>

@@ -28,6 +28,23 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  methods: {
+    async login(a) {
+      a.preventDefault();
+      let userEmail = document.getElementById("email").value;
+      let userPassword = document.getElementById("password").value;
+      if (userEmail === "" || userPassword === "") {
+        alert("Please fill out all fields");
+      }
+      // if userEmail or if userPassword don't match or if userEmail don't exist, write 2 else ifs
+      else {
+        signIn(supabase, userEmail, userPassword);
+      }
+    },
+  },
+};
+</script>
 
 <style></style>
