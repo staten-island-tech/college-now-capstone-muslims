@@ -8,8 +8,10 @@
       </div>
       <h2 class="text">Please enter your birthday</h2>
       <div class="age"><input type="date" v-model="userBirthdate" /></div>
-      <h2 class="text">Please enter your location (State and City)</h2>
-      <div class="location"><input type="select" /></div>
+      <h2 class="text">Please select your state</h2>
+      <div class="state">
+        <Dropdown />
+      </div>
       <h2 class="text">Password</h2>
       <div class="password">
         <input type="password" id="password" />
@@ -34,7 +36,11 @@
 </template>
 
 <script>
+import Dropdown from "../components/DropDownMenu.vue";
 export default {
+  components: {
+    Dropdown,
+  },
   methods: {
     calculateAge(birthdate) {
       const today = new Date();
