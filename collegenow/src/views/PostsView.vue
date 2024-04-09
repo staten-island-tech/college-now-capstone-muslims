@@ -19,13 +19,11 @@
 </template>
 
 <script>
-import Vue3TouchEvents from "vue3-touch-events";
-Vue.use(Vue3TouchEvents);
 import Post from "../components/Post.vue";
 
 export default {
   components: {
-    SwipeBox,
+    Post,
   },
   data() {
     return {

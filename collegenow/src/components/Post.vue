@@ -16,7 +16,6 @@ export default {
     Description: String,
     ownerName: String,
     number: String,
-    image: String,
   },
 };
 </script>

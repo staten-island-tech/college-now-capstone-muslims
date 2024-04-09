@@ -1,7 +1,11 @@
 <template>
   <div class="dropdown">
-    <select name="states" class="states">
-      <option v-for="state in states" :key="state.name">
+    <select name="statesDropDownMenu" class="states">
+      <option
+        v-for="state in states"
+        :key="state.name"
+        :value="state.abbreviation"
+      >
         {{ states.abbreviation }}
       </option>
     </select>
@@ -10,7 +14,7 @@
 
 <script>
 export default {
-  name: Dropdown,
+  name: "Dropdown",
   data() {
     return {
       states: [
