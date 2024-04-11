@@ -16,7 +16,7 @@
       <div class="password">
         <input type="password" id="password" />
       </div>
-      <h2 class="text">Re-enter Password</h2>
+      <h2 class="text">Re-enter your password</h2>
       <div class="password">
         <input type="password" id="confirm" />
       </div>

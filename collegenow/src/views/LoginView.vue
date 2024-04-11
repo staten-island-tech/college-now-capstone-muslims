@@ -22,7 +22,7 @@
     </form>
     <div class="toSignUp">
       Don't have an account?<a
-        ><RouterLink to="/signup"> Sign Up Here</RouterLink></a
+        ><RouterLink to="/signup">Sign Up Here</RouterLink></a
       >
     </div>
   </div>

@@ -1,15 +1,14 @@
 <template>
-  <div class="dropdown">
-    <select name="statesDropDownMenu" class="states">
-      <option
-        v-for="state in states"
-        :key="state.name"
-        :value="state.abbreviation"
-      >
-        {{ states.abbreviation }}
-      </option>
-    </select>
-  </div>
+  <select v-model="selectedState" class="states">
+    <option disabled value=""></option>
+    <option
+      v-for="state in states"
+      :value="state.abbreviation"
+      :key="state.name"
+    >
+      {{ state.abbreviation }}
+    </option>
+  </select>
 </template>
 
 <script>
@@ -223,6 +222,7 @@ export default {
           abbreviation: "WY",
         }),
       ],
+      selectedState: ``,
     };
   },
 };
