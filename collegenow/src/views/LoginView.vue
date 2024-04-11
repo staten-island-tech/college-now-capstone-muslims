@@ -45,6 +45,25 @@ export default {
     },
   },
 };
+
+async function login(username, password) {
+  try {
+    const res = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username.toLowerCase(),
+        password: password,
+      }),
+    });
+    const user = await res.json();
+    console.log(user);
+  } catch (error) {
+    console.log(error);
+  }
+}
 </script>
 
 <style></style>
