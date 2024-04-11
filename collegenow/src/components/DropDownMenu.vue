@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       states: [
-        ({
+        {
           name: "Alabama",
           abbreviation: "AL",
         },
@@ -220,7 +220,7 @@ export default {
         {
           name: "Wyoming",
           abbreviation: "WY",
-        }),
+        },
       ],
       selectedState: ``,
     };
