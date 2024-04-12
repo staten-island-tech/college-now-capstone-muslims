@@ -10,7 +10,7 @@ export default {
 //change it from all profiles to avatars posts etc
   async createProfile() {
   try {
-    const res = await fetch("http://localhost:3000/createProfile", {
+    const res = await fetch("http://localhost:5173/createProfile", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export default {
 
 async profiles(username, password) {
   try {
-    const res = await fetch("http://localhost:3000/profiles", {
+    const res = await fetch("http://localhost:5173/profiles", {
       method: "DEL",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +42,7 @@ async profiles(username, password) {
 
 async updateProfiles() {
   try {
-    const res = await fetch("http://localhost:3000/updateProfiles/:id", {
+    const res = await fetch("http://localhost:5173/updateProfiles/:id", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +58,7 @@ async updateProfiles() {
 
 async deleteProfiles() {
   try {
-    const res = await fetch("http://localhost:3000/deleteProfiles/:id", {
+    const res = await fetch("http://localhost:5173/deleteProfiles/:id", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

@@ -36,9 +36,9 @@ export default {
   methods: {},
 };
 
-async function  createPost(Name, ownerName, number, Description) {
+async function createPost(Name, ownerName, number, Description) {
   try {
-    const res = await fetch("http://localhost:3000/createPost", {
+    const res = await fetch("http://localhost:5173/createPost", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ async function  createPost(Name, ownerName, number, Description) {
 
 async function posts(username, password) {
   try {
-    const res = await fetch("http://localhost:3000/posts", {
+    const res = await fetch("http://localhost:5173/posts", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ async function posts(username, password) {
 
 async function updatePosts(username, password) {
   try {
-    const res = await fetch("http://localhost:3000/updatePosts/:id", {
+    const res = await fetch("http://localhost:5173/updatePosts/:id", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -97,7 +97,7 @@ async function updatePosts(username, password) {
 
 async function deletePosts(username, password) {
   try {
-    const res = await fetch("http://localhost:3000/deletePosts/:id", {
+    const res = await fetch("http://localhost:5173/deletePosts/:id", {
       method: "DEL",
       headers: {
         "Content-Type": "application/json",

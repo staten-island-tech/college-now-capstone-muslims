@@ -74,7 +74,7 @@ export default {
     },
     async register() {
       try {
-        const res = await fetch("http://localhost:3000/register", {
+        const res = await fetch("http://localhost:5173/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
