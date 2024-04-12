@@ -20,7 +20,13 @@
       <div class="password">
         <input type="password" id="confirm" />
       </div>
-      <input type="submit" value="Sign Up" id="submit" @click="signup" />
+      <input
+        type="submit"
+        value="Sign Up"
+        id="submit"
+        @click="signup"
+        to="/profile"
+      />
     </form>
     <div class="toLogin">
       Already have an account?
@@ -37,6 +43,7 @@
 
 <script>
 import Dropdown from "../components/DropDownMenu.vue";
+import uploadPost from "../components/uploadPost.vue";
 export default {
   components: {
     Dropdown,
