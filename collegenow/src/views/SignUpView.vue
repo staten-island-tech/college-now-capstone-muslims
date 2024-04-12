@@ -1,7 +1,7 @@
 <template>
   <div class="signUp">
     <h1 class="title">Sign Up</h1>
-    <form class="signUpForm">
+    <form class="signUpForm" @submit.prevent="register(username, password)">
       <h2 class="text">Email</h2>
       <div class="email">
         <input type="email" id="email" />
@@ -52,11 +52,7 @@ export default {
       }
       return age;
     },
-    async signup(e) {
-      e.preventDefault();
-      let userEmail = document.getElementById("email").value;
-      let userPassword = document.getElementById("password").value;
-      let confirmed = document.getElementById("confirm").value;
+    async signup(age) {
       if (userEmail === "" || userPassword === "" || confirmed === "") {
         alert("Please fill out all fields");
       } else if (userPassword != confirmed) {
@@ -66,8 +62,6 @@ export default {
       } else if (18 > age) {
         alert("You must be 18 years old or older to use the application");
       } else {
-        await signUp(supabase, userEmail, confirmed);
-        authStore();
         router.push("login");
       }
     },
