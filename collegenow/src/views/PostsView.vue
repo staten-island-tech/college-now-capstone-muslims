@@ -1,4 +1,9 @@
 <template>
+  <div class="logo">
+    <RouterLink class="router" to="/"
+      ><button><img src="" alt="" /></button
+    ></RouterLink>
+  </div>
   <div class="Posts">
     <Post
       v-for="post in uploadedPhotos"
@@ -10,16 +15,17 @@
       :number="post.number"
     />
   </div>
-  <div class="logo">
-    <RouterLink class="router" to="/"
-      ><button><img src="" alt="" /></button
-    ></RouterLink>
-  </div>
+  <button @click="true"></button>
+  <uploadPost v-model="visible">
+    <h2>Create new post</h2>
+  </uploadPost>
+
   <!-- still need filters, the my profile, swiping to next pet, button to next photo -->
 </template>
 
 <script>
 import Post from "../components/Post.vue";
+import uploadPost from "../components/uploadPost.vue";
 
 export default {
   components: {
