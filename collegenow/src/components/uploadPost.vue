@@ -3,7 +3,7 @@
     <Dialog>
       <FileUpload
         name="fileUpload[]"
-        url="/api/upload"
+        url=""
         @upload=""
         :multiple="true"
         accept="image/*"
@@ -22,7 +22,6 @@ import Dialog from "primevue/dialog";
 import FileUpload from "primevue/fileupload";
 export default {
   name: "uploadPost",
-  methods: {},
 };
 </script>
 
