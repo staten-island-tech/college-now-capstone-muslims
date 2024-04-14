@@ -60,6 +60,9 @@ export default {
       return age;
     },
     async signup(age) {
+      let userEmail = document.getElementById("email").value;
+      let userPassword = document.getElementById("password").value;
+      let confirmed = document.getElementById("confirm").value;
       if (userEmail === "" || userPassword === "" || confirmed === "") {
         alert("Please fill out all fields");
       } else if (userPassword != confirmed) {
