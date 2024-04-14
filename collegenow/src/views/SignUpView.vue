@@ -1,7 +1,14 @@
 <template>
   <div class="signUp">
     <h1 class="title">Sign Up</h1>
-    <form class="signUpForm" @submit.prevent="register(age, userPassword, userEmail)">
+    <form
+      class="signUpForm"
+      @submit.prevent="register(age, userPassword, userEmail)"
+    >
+      <h2 class="text">Please choose a username (Preferably your name)</h2>
+      <div class="username">
+        <input type="text" id="confirm" />
+      </div>
       <h2 class="text">Email</h2>
       <div class="email">
         <input type="email" id="email" />
@@ -42,7 +49,7 @@
 </template>
 
 <script>
-import router from "../router/index"
+import router from "../router/index";
 import Dropdown from "../components/DropDownMenu.vue";
 import uploadPost from "../components/uploadPost.vue";
 export default {
@@ -74,7 +81,7 @@ export default {
         alert("You must be 18 years old or older to use the application");
       } else {
         router.push("login");
-        return age, userPassword, userEmail
+        return age, userPassword, userEmail;
       }
     },
     async register(age, userPassword, userEmail) {

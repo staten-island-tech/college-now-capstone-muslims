@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const slugify = require("slugify");
 
 const userSchema = new mongoose.Schema({
-  name: {
+  username: {
     type: String,
     trim: true,
-    required: "Please enter a user name!",
+    required: "Please enter a username!",
   },
   description: {
     type: String,

@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const slugify = require("slugify");
 
 const petSchema = new mongoose.Schema({
-  name: {
+  petName: {
     type: String,
     trim: true,
-    required: "Please enter a store name!",
+    required: "Please enter a your pet's name!",
   },
   description: {
     type: String,
