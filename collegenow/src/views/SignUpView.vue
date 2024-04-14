@@ -1,7 +1,7 @@
 <template>
   <div class="signUp">
     <h1 class="title">Sign Up</h1>
-    <form class="signUpForm" @submit.prevent="register(username, password)">
+    <form class="signUpForm" @submit.prevent="register(age, userPassword, userEmail)">
       <h2 class="text">Email</h2>
       <div class="email">
         <input type="email" id="email" />
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import router from "../router/index"
 import Dropdown from "../components/DropDownMenu.vue";
 import uploadPost from "../components/uploadPost.vue";
 export default {
@@ -73,16 +74,21 @@ export default {
         alert("You must be 18 years old or older to use the application");
       } else {
         router.push("login");
+        return age, userPassword, userEmail
       }
     },
-    async register() {
+    async register(age, userPassword, userEmail) {
       try {
-        const res = await fetch("http://localhost:5173/register", {
+        const res = await fetch("http://localhost:5173/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({}),
+          body: JSON.stringify({
+            email: userEmail,
+            password: userPassword,
+            age: age,
+          }),
         });
         const user = await res.json();
         console.log(user);
