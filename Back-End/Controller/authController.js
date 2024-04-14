@@ -10,7 +10,7 @@ const generateToken = async function (user) {
   return token;
 };
 
-exports.register = async function (req, res) {
+exports.signup = async function (req, res) {
   if (!req.body.email) {
     res.json({ success: false, msg: "Please enter an email." });
   } else if (!req.body.username) {
@@ -67,8 +67,6 @@ exports.login = async (req, res) => {
     let dataSent = {
       email: user.email,
       username: user.username,
-      age: user.age,
-      location: user.location,
     };
     res.send({ dataSent, token });
   } catch (error) {

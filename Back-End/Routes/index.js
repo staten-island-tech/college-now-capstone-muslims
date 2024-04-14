@@ -17,7 +17,7 @@ router.get("/posts", postController.getPost);
 router.patch("/updatePost/:id", postController.updatePost);
 router.delete("/deletePost/:id", postController.deletePost);
 
-router.post("/register", authController.register);
+router.post("/signup", authController.signup);
 router.post("/login", authController.login);
 router.get("/protected", authController.authCheck, authController.protected);
 
