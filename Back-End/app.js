@@ -1,3 +1,4 @@
+import signup from "../Back-End/Controller/authController";
 const express = require("express");
 const port = process.env.PORT || 5173;
 const app = express();

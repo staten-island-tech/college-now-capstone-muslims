@@ -1,11 +1,8 @@
 <template>
   <div class="signUp">
     <h1 class="title">Sign Up</h1>
-    <form
-      class="signUpForm"
-      @submit.prevent="register(age, userPassword, userEmail)"
-    >
-      <h2 class="text">Please choose a username</h2>
+    <form name="signupForm">
+      <h2 class="text">Username</h2>
       <div class="username">
         <input type="text" id="username" />
       </div>
@@ -31,8 +28,11 @@
         type="submit"
         value="Sign Up"
         id="submit"
-        @click="signup"
-        to="/profile"
+        @submit.prevent="
+          calculateAge(birthdate),
+            signup(age),
+            register(age, userPassword, userEmail)
+        "
       />
     </form>
     <div class="toLogin">
@@ -51,7 +51,7 @@
 <script>
 import { ref } from "vue";
 import router from "../router/index";
-import Dropdown from "../components/DropDownMenu.vue";  
+import Dropdown from "../components/DropDownMenu.vue";
 const age = ref("");
 const userEmail = ref("");
 const userPassword = ref("");
@@ -83,7 +83,7 @@ export default {
       } else if (18 > age) {
         alert("You must be 18 years old or older to use the application");
       } else {
-        router.push("login");
+        router.push("profile");
         return age, userPassword, userEmail;
       }
     },
