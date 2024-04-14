@@ -1,6 +1,13 @@
 <template>
   <div class="pfp">
-    <Avatar image="uploadedImg" size="small" shape="circle" />
+    <Avatar image="uploadedImg" size="small" shape="circle" />\
+    <div class="description">
+      <p>{{ userEmail }}</p>
+      <p>{{ username }}</p>
+      <p>{{ phonenumber }}</p>
+      <p>{{ description about yourself }}</p>
+      <p>{{ location }}</p>
+    </div>
   </div>
 </template>
 
