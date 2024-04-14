@@ -5,9 +5,9 @@
       class="signUpForm"
       @submit.prevent="register(age, userPassword, userEmail)"
     >
-      <h2 class="text">Please choose a username (Preferably your name)</h2>
+      <h2 class="text">Please choose a username</h2>
       <div class="username">
-        <input type="text" id="confirm" />
+        <input type="text" id="username" />
       </div>
       <h2 class="text">Email</h2>
       <div class="email">
@@ -49,9 +49,12 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import router from "../router/index";
-import Dropdown from "../components/DropDownMenu.vue";
-import uploadPost from "../components/uploadPost.vue";
+import Dropdown from "../components/DropDownMenu.vue";  
+const age = ref("");
+const userEmail = ref("");
+const userPassword = ref("");
 export default {
   components: {
     Dropdown,
@@ -70,10 +73,10 @@ export default {
     async signup(age) {
       let userEmail = document.getElementById("email").value;
       let userPassword = document.getElementById("password").value;
-      let confirmed = document.getElementById("confirm").value;
-      if (userEmail === "" || userPassword === "" || confirmed === "") {
+      let confpassword = document.getElementById("confirm").value;
+      if (userEmail === "" || userPassword === "" || confpassword === "") {
         alert("Please fill out all fields");
-      } else if (userPassword != confirmed) {
+      } else if (userPassword != confpassword) {
         alert("Your confirmed password does not match");
       } else if (userPassword.length <= 5) {
         alert("Password must contain at least 6 characters");
