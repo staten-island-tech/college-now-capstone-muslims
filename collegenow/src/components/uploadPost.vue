@@ -11,6 +11,7 @@
       >
         <template #empty>
           <p>Drag and drop files to here to upload.</p>
+          <p>number, email, location, pet description, owner name,</p>
         </template>
       </FileUpload>
     </Dialog>
