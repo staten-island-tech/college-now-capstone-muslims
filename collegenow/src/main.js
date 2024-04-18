@@ -10,10 +10,12 @@ import PrimeVue from "primevue/config";
 import Dialog from "primevue/dialog";
 import FileUpload from "primevue/fileupload";
 import Avatar from "primevue/avatar";
+import Divider from "primevue/divider";
 
 const app = createApp(App);
 
 app.use(PrimeVue);
+app.component("Divider", Divider);
 app.component("Dialog", Dialog);
 app.component("FileUpload", FileUpload);
 app.component("Avatar", Avatar);
