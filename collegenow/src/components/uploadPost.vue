@@ -15,7 +15,7 @@
     </select>
     <div class="file-upload">
       <label for="fileInput">Click here to upload a file</label>
-      <input id="fileInput" type="file" @change="handleFileUpload" multiple accept="image/*">
+      <input id="fileInput" type="file" @change="handleFileUpload" multiple accept="image/*" style="display: none;">
     </div>
     <textarea v-model="description" placeholder="Write a description..."></textarea>
     <button @click="submitPost">Submit</button>
