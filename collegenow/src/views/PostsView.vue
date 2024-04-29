@@ -1,4 +1,5 @@
 <template>
+  <accountButton />
   <div class="logo">
     <RouterLink class="router" to="/"
       ><button><img src="" alt="" /></button
@@ -15,22 +16,22 @@
       :number="post.number"
     />
   </div>
-  <button @click="toggleVisibility"></button>
-  <uploadPost v-if="visible">
-    <h2>Create new post</h2>
-  </uploadPost>
+  <button @click="toggleVisibility">Upload Post</button>
+  <uploadPost v-if="visible" />
 
-  <!-- still need filters, the my profile, swiping to next pet, button to next photo -->
+  <!-- still need filters,swiping to next pet, button to next photo -->
 </template>
 
 <script>
 import Post from "../components/Post.vue";
 import uploadPost from "../components/uploadPost.vue";
+import accountButton from "../components/accountButton.vue";
 
 export default {
   components: {
     Post,
     uploadPost,
+    accountButton,
   },
   data() {
     return {
