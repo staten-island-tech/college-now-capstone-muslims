@@ -1,31 +1,67 @@
 <template>
-  <div>
-    <Dialog>
-      <FileUpload
-        name="fileUpload[]"
-        url=""
-        @upload=""
-        :multiple="true"
-        accept="image/*"
-        :maxFileSize="1000000"
-      >
-        <template #empty>
-          <p>Drag and drop files to here to upload.</p>
-          <p>number, email, location, pet description, owner name</p>
-        </template>
-      </FileUpload>
-    </Dialog>
+  <div class="uploadPost-container">
+    <div class="petName">
+      <label for="petName">Pet Name:</label>
+      <input type="text" id="petName"/>
+    </div>
+    <div class="petAge">
+      <label for="petAge">Pet Age:</label>
+      <input type="text" id="petAge"/>
+    </div>
+    <label for="animalType">Select an animal type:</label>
+    <select v-model="selectedAnimal" id="animalType">
+      <option disabled value="">Please select an option</option>
+      <option v-for="animal in animalTypes" :key="animal">{{ animal }}</option>
+    </select>
+    <div class="file-upload">
+      <label for="fileInput">Click here to upload a file</label>
+      <input id="fileInput" type="file" @change="handleFileUpload" multiple accept="image/*">
+    </div>
+    <textarea v-model="description" placeholder="Write a description..."></textarea>
+    <button @click="submitPost">Submit</button>
+    <Post v-if="showPost" :Name="postName" :ownerName="postOwnerName" :number="postNumber" :Description="postDescription" />
   </div>
 </template>
 
 <script>
-import Dialog from "primevue/dialog";
-import FileUpload from "primevue/fileupload";
+import Post from "./Post.vue";
+
 export default {
   name: "uploadPost",
   components: {
-    Dialog,
-    FileUpload,
+    Post,
+  },
+  data() {
+    return {
+      postName: "",
+      postOwnerName: "",
+      postNumber: "",
+      postDescription: "",
+      showPost: false,
+      files: [],
+      description: "",
+      selectedAnimal: '',
+      animalTypes: ['Dog', 'Cat', 'Bird', 'Fish', 'Rabbit'] // Add more animal types as needed
+    };
+  },
+  methods: {
+    handleFileUpload(event) {
+      // Retrieve the uploaded files
+      this.files = event.target.files;
+    },
+    submitPost() {
+      // Emit an event with the uploaded files and description
+      this.$emit("submitPost", {
+        name: "Name", // Adjust as needed
+        ownerName: "Owner Name", // Adjust as needed
+        number: "Number", // Adjust as needed
+        description: this.description,
+        images: this.files,
+      });
+      // Clear input fields after submission if needed
+      this.files = [];
+      this.description = "";
+    },
   },
 };
 </script>
@@ -64,7 +100,7 @@ export default {
   margin-bottom: 20px;
 }
 
-.uploadPost-container .file-upload p {
+.uploadPost-container .file-upload input {
   margin: 0;
   color: #666;
 }

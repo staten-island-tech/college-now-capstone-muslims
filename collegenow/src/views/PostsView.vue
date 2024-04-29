@@ -17,7 +17,7 @@
     />
   </div>
   <button @click="toggleVisibility">Upload Post</button>
-  <uploadPost v-if="visible" />
+  <uploadPost v-if="visible" @close="toggleVisibility"/>
 
   <!-- still need filters,swiping to next pet, button to next photo -->
 </template>
@@ -45,6 +45,10 @@ export default {
   methods: {
     toggleVisibility() {
       this.visible = !this.visible;
+    },
+    addPost(postData) {
+      // Add the new post to the posts array
+      this.posts.push(postData);
     },
     async createPost(Name, ownerName, number, Description) {
       try {
