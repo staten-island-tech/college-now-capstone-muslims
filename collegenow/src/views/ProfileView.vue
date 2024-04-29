@@ -1,31 +1,59 @@
 <template>
   <div class="profile">
     <button v-if="!editMode" @click="editProfile">Edit Profile</button>
-    <button v-if="editMode" @click="submitProfile">Submit Profile</button>
+    <button v-if="editMode" @click="confirmEdits">Confirm Edits</button>
     <div class="pfp" @click="handlePfpClick">
-      <label v-if="editMode && !pfpImage" for="profilePictureUpload">Click to upload profile picture</label>
-      <input id="profilePictureUpload" type="file" accept="image/*" @change="handleProfilePictureUpload" style="display: none;">
-      <img v-if="pfpImage" :src="pfpImage" class="pfp-image">
+      <label v-if="editMode && !pfpImage" for="profilePictureUpload"
+        >Click to upload profile picture</label
+      >
+      <input
+        id="profilePictureUpload"
+        type="file"
+        accept="image/*"
+        @change="handleProfilePictureUpload"
+        style="display: none"
+      />
+      <img v-if="pfpImage" :src="pfpImage" class="pfp-image" />
     </div>
     <div class="email">
       <label for="email">Email:</label>
-      <input type="text" id="email" v-model="tempEmail" :disabled="!editMode">
+      <input type="text" id="email" v-model="tempEmail" :disabled="!editMode" />
     </div>
     <div class="username">
       <label for="username">Username:</label>
-      <input type="text" id="username" v-model="tempUsername" :disabled="!editMode">
+      <input
+        type="text"
+        id="username"
+        v-model="tempUsername"
+        :disabled="!editMode"
+      />
     </div>
     <div class="phoneNumber">
       <label for="phoneNumber">Phone Number:</label>
-      <input type="text" id="phoneNumber" v-model="tempPhoneNumber" :disabled="!editMode">
+      <input
+        type="text"
+        id="phoneNumber"
+        v-model="tempPhoneNumber"
+        :disabled="!editMode"
+      />
     </div>
     <div class="decription">
       <label for="description">Description:</label>
-      <input type="text" id="description" v-model="tempDescription" :disabled="!editMode">
+      <input
+        type="text"
+        id="description"
+        v-model="tempDescription"
+        :disabled="!editMode"
+      />
     </div>
     <div class="location">
       <label for="location">Location:</label>
-      <input type="text" id="location" v-model="tempLocation" :disabled="!editMode">
+      <input
+        type="text"
+        id="location"
+        v-model="tempLocation"
+        :disabled="!editMode"
+      />
     </div>
   </div>
 </template>
@@ -73,7 +101,7 @@ export default {
       this.tempLocation = this.location;
       this.editMode = true;
     },
-    submitProfile() {
+    confirmEdits() {
       // Save changes
       this.email = this.tempEmail;
       this.username = this.tempUsername;

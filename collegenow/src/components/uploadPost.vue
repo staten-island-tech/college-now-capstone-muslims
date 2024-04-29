@@ -2,11 +2,11 @@
   <div class="uploadPost-container">
     <div class="petName">
       <label for="petName">Pet Name:</label>
-      <input type="text" id="petName"/>
+      <input type="text" id="petName" />
     </div>
     <div class="petAge">
       <label for="petAge">Pet Age:</label>
-      <input type="text" id="petAge"/>
+      <input type="text" id="petAge" />
     </div>
     <label for="animalType">Select an animal type:</label>
     <select v-model="selectedAnimal" id="animalType">
@@ -15,17 +15,33 @@
     </select>
     <div class="file-upload">
       <label for="fileInput">Click here to upload a file</label>
-      <input id="fileInput" type="file" @change="handleFileUpload" multiple accept="image/*" style="display: none;">
+      <input
+        id="fileInput"
+        type="file"
+        @change="handleFileUpload"
+        multiple
+        accept="image/*"
+        style="display: none"
+      />
     </div>
-    <textarea v-model="description" placeholder="Write a description..."></textarea>
+    <textarea
+      v-model="description"
+      placeholder="Write a description..."
+    ></textarea>
     <button @click="submitPost">Submit</button>
-    <Post v-if="showPost" :Name="postName" :ownerName="postOwnerName" :number="postNumber" :Description="postDescription" />
+    <Post
+      v-if="showPost"
+      :Name="postName"
+      :ownerName="postOwnerName"
+      :number="postNumber"
+      :Description="postDescription"
+    />
   </div>
 </template>
 
 <script>
 import Post from "./Post.vue";
-
+// put the dialog back and the fileupload back keep the Pet Ages and stuff, do css
 export default {
   name: "uploadPost",
   components: {
@@ -40,8 +56,8 @@ export default {
       showPost: false,
       files: [],
       description: "",
-      selectedAnimal: '',
-      animalTypes: ['Dog', 'Cat', 'Bird', 'Fish', 'Rabbit'] // Add more animal types as needed
+      selectedAnimal: "",
+      animalTypes: ["Dog", "Cat", "Bird", "Fish", "Rabbit"], // Add more animal types as needed
     };
   },
   methods: {

@@ -1,11 +1,8 @@
 <template>
-  <div>
-    <editProfile />
-  </div>
+  <div></div>
 </template>
 
 <script>
-import editProfile from "../components/updatePfp.vue";
 export default {
   methods: {
     async createProfile() {
