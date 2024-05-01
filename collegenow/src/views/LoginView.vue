@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { authStore } from "../stores/counter";
 export default {
   methods: {
     async login(a) {

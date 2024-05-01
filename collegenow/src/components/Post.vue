@@ -16,6 +16,7 @@ export default {
     Description: String,
     ownerName: String,
     number: String,
+    //ask about the different contact info and what we putting
   },
 };
 </script>
@@ -23,7 +24,6 @@ export default {
 <style>
 .post {
   width: 25%;
-
   height: 550px;
   margin: 10px auto;
 }

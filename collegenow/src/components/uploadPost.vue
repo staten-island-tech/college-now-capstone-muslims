@@ -1,5 +1,6 @@
 <template>
-  <div class="uploadPost-container">
+  <button @click="visible = true">Upload Post</button>
+  <Dialog v-model:visible="visible">
     <div class="petName">
       <label for="petName">Pet Name:</label>
       <input type="text" id="petName" />
@@ -13,22 +14,21 @@
       <option disabled value="">Please select an option</option>
       <option v-for="animal in animalTypes" :key="animal">{{ animal }}</option>
     </select>
-    <div class="file-upload">
-      <label for="fileInput">Click here to upload a file</label>
-      <input
-        id="fileInput"
-        type="file"
-        @change="handleFileUpload"
-        multiple
-        accept="image/*"
-        style="display: none"
-      />
-    </div>
+    <FileUpload
+      name="fileUpload[]"
+      url=""
+      @upload=""
+      :multiple="true"
+      accept="image/*"
+      :maxFileSize="1000000"
+    >
+    </FileUpload>
     <textarea
       v-model="description"
       placeholder="Write a description..."
     ></textarea>
-    <button @click="submitPost">Submit</button>
+    <button severity="secondary" @click="visible = false">Cancel</button>
+    <button @click="submitPost, (visible = false)">Post</button>
     <Post
       v-if="showPost"
       :Name="postName"
@@ -36,16 +36,20 @@
       :number="postNumber"
       :Description="postDescription"
     />
-  </div>
+  </Dialog>
+  <br />
 </template>
 
 <script>
+import Dialog from "primevue/dialog";
 import Post from "./Post.vue";
-// put the dialog back and the fileupload back keep the Pet Ages and stuff, do css
+import FileUpload from "primevue/fileupload";
 export default {
   name: "uploadPost",
   components: {
     Post,
+    Dialog,
+    FileUpload,
   },
   data() {
     return {
@@ -58,6 +62,7 @@ export default {
       description: "",
       selectedAnimal: "",
       animalTypes: ["Dog", "Cat", "Bird", "Fish", "Rabbit"], // Add more animal types as needed
+      visible: false,
     };
   },
   methods: {

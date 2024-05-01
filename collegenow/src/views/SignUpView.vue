@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { authStore } from "../stores/counter";
 import { ref } from "vue";
 import router from "../router/index";
 import Dropdown from "../components/DropDownMenu.vue";

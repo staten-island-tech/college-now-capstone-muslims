@@ -16,8 +16,7 @@
       :number="post.number"
     />
   </div>
-  <button @click="toggleVisibility">Upload Post</button>
-  <uploadPost v-if="visible" @close="toggleVisibility"/>
+  <uploadPost />
 
   <!-- still need filters,swiping to next pet, button to next photo -->
 </template>
