@@ -14,28 +14,22 @@
       <option disabled value="">Please select an option</option>
       <option v-for="animal in animalTypes" :key="animal">{{ animal }}</option>
     </select>
-    <FileUpload
-      name="fileUpload[]"
-      url=""
-      @upload=""
-      :multiple="true"
-      accept="image/*"
-      :maxFileSize="1000000"
-    >
-    </FileUpload>
+    <div class="file-upload">
+      <label for="fileInput">Click here to upload a file</label>
+      <input
+        id="fileInput"
+        type="file"
+        @change="handleFileUpload"
+        multiple
+        accept="image/*"
+      />
+    </div>
     <textarea
       v-model="description"
       placeholder="Write a description..."
     ></textarea>
     <button severity="secondary" @click="visible = false">Cancel</button>
     <button @click="submitPost, (visible = false)">Post</button>
-    <Post
-      v-if="showPost"
-      :Name="postName"
-      :ownerName="postOwnerName"
-      :number="postNumber"
-      :Description="postDescription"
-    />
   </Dialog>
   <br />
 </template>

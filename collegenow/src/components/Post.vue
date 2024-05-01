@@ -4,6 +4,7 @@
     <h2>{{ ownerName }}</h2>
     <p>{{ number }}</p>
     <p>{{ Description }}</p>
+    <p>{{ email }}</p>
     <img src="" alt="" />
   </div>
 </template>

@@ -111,6 +111,37 @@ export default {
       // Exit edit mode
       this.editMode = false;
     },
+    async createProfile() {
+      try {
+        const res = await fetch("http://localhost:5173/createProfile", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
+        const user = await res.json();
+        console.log(user);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async updateProfiles() {
+      try {
+        const res = await fetch("http://localhost:5173/updateProfiles/:id", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
+        const user = await res.json();
+        console.log(user);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>

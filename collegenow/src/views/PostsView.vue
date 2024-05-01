@@ -14,6 +14,7 @@
       :description="post.description"
       :ownerName="post.ownerName"
       :number="post.number"
+      :email="post.email"
     />
   </div>
   <uploadPost />
@@ -69,45 +70,7 @@ export default {
         console.log(error);
       }
     },
-
-    async posts(username, password) {
-      try {
-        const res = await fetch("http://localhost:5173/posts", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: username.toLowerCase(),
-            password: password,
-          }),
-        });
-        const user = await res.json();
-        console.log(user);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    async updatePosts(username, password) {
-      try {
-        const res = await fetch("http://localhost:5173/updatePosts/:id", {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: username.toLowerCase(),
-            password: password,
-          }),
-        });
-        const user = await res.json();
-        console.log(user);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
+    
     async deletePosts(username, password) {
       try {
         const res = await fetch("http://localhost:5173/deletePosts/:id", {

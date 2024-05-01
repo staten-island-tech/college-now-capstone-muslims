@@ -88,7 +88,7 @@ export default {
         return age, userPassword, userEmail;
       }
     },
-    async register(age, userPassword, userEmail) {
+    async register(age, userPassword, userEmail, username, state) {
       try {
         const res = await fetch("http://localhost:5173/signup", {
           method: "POST",
@@ -99,6 +99,8 @@ export default {
             email: userEmail,
             password: userPassword,
             age: age,
+            username: username,
+            state: state,
           }),
         });
         const user = await res.json();
