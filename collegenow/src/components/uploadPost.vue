@@ -14,16 +14,14 @@
       <option disabled value="">Please select an option</option>
       <option v-for="animal in animalTypes" :key="animal">{{ animal }}</option>
     </select>
-    <div class="file-upload">
-      <label for="fileInput">Click here to upload a file</label>
-      <input
-        id="fileInput"
-        type="file"
-        @change="handleFileUpload"
-        multiple
-        accept="image/*"
-      />
-    </div>
+    <FileUpload
+      name="fileUpload[]"
+      url=""
+      @upload=""
+      :multiple="true"
+      accept="image/*"
+    >
+    </FileUpload>
     <textarea
       v-model="description"
       placeholder="Write a description..."
