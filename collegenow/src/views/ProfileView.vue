@@ -60,7 +60,7 @@
 
 <script>
 import Avatar from "primevue/avatar";
-
+import "primeicons/primeicons.css";
 export default {
   components: {
     Avatar,

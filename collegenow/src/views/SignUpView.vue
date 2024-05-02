@@ -37,7 +37,7 @@
     </form>
     <div class="toLogin">
       Already have an account?
-      <a><RouterLink to="/login">Login here</RouterLink></a>
+      <RouterLink to="/login">Login here</RouterLink>
     </div>
   </div>
   <img class="backgroundImage" src="" alt="" />
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { authStore } from "../stores/counter";
+import { authStore } from "@/stores/auth";
 import { ref } from "vue";
 import router from "../router/index";
 import Dropdown from "../components/DropDownMenu.vue";

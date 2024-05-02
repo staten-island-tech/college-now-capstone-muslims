@@ -21,15 +21,13 @@
       </div>
     </form>
     <div class="toSignUp">
-      Don't have an account?<a
-        ><RouterLink to="/signup">Sign Up Here</RouterLink></a
-      >
+      Don't have an account?<RouterLink to="/signup">Sign Up Here</RouterLink>
     </div>
   </div>
 </template>
 
 <script>
-import { authStore } from "../stores/counter";
+import { authStore } from "@/stores/auth";
 export default {
   methods: {
     async login(a) {
@@ -46,24 +44,6 @@ export default {
     },
   },
 };
-async function login(username, password) {
-  try {
-    const res = await fetch("http://localhost:5173/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username.toLowerCase(),
-        password: password,
-      }),
-    });
-    const user = await res.json();
-    console.log(user);
-  } catch (error) {
-    console.log(error);
-  }
-}
 </script>
 
 <style></style>

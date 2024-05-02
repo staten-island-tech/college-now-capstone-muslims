@@ -36,6 +36,7 @@
 import Dialog from "primevue/dialog";
 import Post from "./Post.vue";
 import FileUpload from "primevue/fileupload";
+//ask to put email, number in the container where you upload a post
 export default {
   name: "uploadPost",
   components: {

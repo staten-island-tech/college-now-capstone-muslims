@@ -1,21 +1,26 @@
 <template>
-  <div class="accountDropdown" @click="toggleDropdown">
-    <Avatar icon="pi pi-user" size="small" shape="circle" />
-    <div class="dropdownMenu" v-if="dropdownVisible">
-      <p to="/profile">My Profile</p>
-      <p to="/editProfile">Edit Profile</p>
-      <Divider />
-      <p to="/login">
+  <Avatar
+    @click="toggleDropdown"
+    icon="pi pi-user"
+    size="small"
+    shape="circle"
+  />
+  <div class="dropdownMenu" v-if="dropdownVisible">
+    <RouterLink to="/profile"><p>My Profile</p></RouterLink>
+    <Divider type="solid" layout="horizontal" />
+    <RouterLink to="/login"
+      ><p>
         Log Out
-        <i class="fas fa-sign-out-alt"></i>
+        <i class="pi-sign-out"></i>
       </p>
-    </div>
+    </RouterLink>
   </div>
 </template>
 
 <script>
 import Divider from "primevue/divider";
 import Avatar from "primevue/avatar";
+import "primeicons/primeicons.css";
 export default {
   name: "accountButton",
   components: {
@@ -36,21 +41,12 @@ export default {
 </script>
 
 <style>
-.accountDropdown {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
 .dropdownMenu {
-  display: none;
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  padding: 12px 16px;
-  margin-top: 8px;
 }
 
 .dropdownMenu p {
@@ -60,15 +56,7 @@ export default {
   display: block;
 }
 
-.dropdownMenu p:hover {
-  background-color: #f1f1f1;
-}
-
-.accountDropdown:hover .dropdownMenu {
-  display: block;
-}
-
-.accountDropdown:hover .Avatar {
-  background-color: #ddd;
+.dropdownMenu p i {
+  margin-left: 10px;
 }
 </style>
