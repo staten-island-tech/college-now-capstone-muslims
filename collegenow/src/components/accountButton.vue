@@ -9,7 +9,11 @@
     <RouterLink to="/profile" class="profile"><p>My Profile</p></RouterLink>
     <Divider class="divider" />
     <RouterLink to="/login"
-      ><p class="signOut">
+      ><p class="signOut" v-if="notLoggedIn">
+        Log In
+        <i class="pi-sign-out"></i>
+      </p>
+      ><p class="signOut" v-if="!notLoggedIn">
         Log Out
         <i class="pi-sign-out"></i>
       </p>
@@ -35,6 +39,7 @@ export default {
   data() {
     return {
       dropdownVisible: false,
+      notLoggedIn: true,
     };
   },
 };
