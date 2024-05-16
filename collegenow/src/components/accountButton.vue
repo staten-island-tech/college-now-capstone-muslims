@@ -1,15 +1,15 @@
 <template>
   <Avatar
     @click="toggleDropdown"
-    icon="pi pi-user"
+    class="pi pi-user"
     size="small"
     shape="circle"
   />
   <div class="dropdownMenu" v-if="dropdownVisible">
-    <RouterLink to="/profile"><p>My Profile</p></RouterLink>
-    <Divider type="solid" layout="horizontal" />
+    <RouterLink to="/profile" class="profile"><p>My Profile</p></RouterLink>
+    <Divider class="divider" />
     <RouterLink to="/login"
-      ><p>
+      ><p class="signOut">
         Log Out
         <i class="pi-sign-out"></i>
       </p>
@@ -58,5 +58,19 @@ export default {
 
 .dropdownMenu p i {
   margin-left: 10px;
+}
+
+.divider {
+  border-top: 1px solid #ccc;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.profile {
+  text-align: center;
+}
+
+.signOut {
+  margin-left: 30px;
 }
 </style>

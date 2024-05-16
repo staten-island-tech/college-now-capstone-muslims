@@ -1,4 +1,5 @@
 <template>
+  <accountButton />
   <div class="logo">
     <RouterLink class="router" to="/"
       ><button><img src="" alt="" /></button
@@ -21,7 +22,6 @@
   <RouterLink class="router" to="/signup">
     <button class="signUp">Sign Up</button>
   </RouterLink>
-  <accountButton />
 </template>
 
 <script>

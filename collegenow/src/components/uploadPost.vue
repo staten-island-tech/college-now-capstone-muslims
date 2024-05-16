@@ -33,6 +33,7 @@
 </template>
 
 <script>
+//add more parts like email and contact info into the template
 import Dialog from "primevue/dialog";
 import Post from "./Post.vue";
 import FileUpload from "primevue/fileupload";
