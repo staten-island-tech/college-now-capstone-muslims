@@ -1,5 +1,5 @@
 <template>
-  <accountButton />
+  <accountButton @click="checkUser" />
   <div class="logo">
     <RouterLink class="router" to="/"
       ><button><img src="" alt="" /></button
@@ -9,7 +9,7 @@
   <img class="backgroundImage" src="" alt="" />
   <br />
   <div class="Posts">
-    <RouterLink class="router" to="/posts"
+    <RouterLink class="router" to="/posts" @click="checkUser"
       ><button>Posts <img src="" alt="" /></button
     ></RouterLink>
   </div>
@@ -26,9 +26,17 @@
 
 <script>
 import accountButton from "../components/accountButton.vue";
+
 export default {
   components: {
     accountButton,
+  },
+  methods: {
+    checkUser: function () {
+      if (authStore().currentUser === null) {
+        router.push("login");
+      }
+    },
   },
 };
 </script>

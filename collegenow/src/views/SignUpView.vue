@@ -33,6 +33,7 @@
             signup(age),
             register(age, userPassword, userEmail)
         "
+        to="/login"
       />
     </form>
     <div class="toLogin">

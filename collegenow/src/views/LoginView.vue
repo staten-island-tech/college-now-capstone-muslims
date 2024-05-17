@@ -39,9 +39,13 @@ export default {
       }
       // if userEmail or if userPassword don't match or if userEmail don't exist, write 2 else ifs, check tokens
       else {
-        signIn(supabase, userEmail, userPassword);
+        signIn(userEmail, userPassword);
+        this.loggedin = true;
       }
     },
+  },
+  data: {
+    loggedin: false,
   },
 };
 </script>

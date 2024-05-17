@@ -1,5 +1,15 @@
 <template>
   <Avatar
+    v-if="$route.path === '/'"
+    @click="toggleDropdown"
+    class="pi pi-user"
+    size="small"
+    shape="circle"
+  />
+  <Avatar
+    v-else
+    src="/path/to/user/pfp.jpg"
+    alt="User Profile Picture"
     @click="toggleDropdown"
     class="pi pi-user"
     size="small"
@@ -9,11 +19,12 @@
     <RouterLink to="/profile" class="profile"><p>My Profile</p></RouterLink>
     <Divider class="divider" />
     <RouterLink to="/login"
-      ><p class="signOut" v-if="notLoggedIn">
+      ><p class="signIn" v-if="!loggedin">
         Log In
-        <i class="pi-sign-out"></i>
+        <i class="pi-sign-in"></i>
       </p>
-      ><p class="signOut" v-if="!notLoggedIn">
+      >
+      <p class="signOut" v-if="loggedin" @click="logOut">
         Log Out
         <i class="pi-sign-out"></i>
       </p>
@@ -25,6 +36,7 @@
 import Divider from "primevue/divider";
 import Avatar from "primevue/avatar";
 import "primeicons/primeicons.css";
+
 export default {
   name: "accountButton",
   components: {
@@ -35,11 +47,16 @@ export default {
     toggleDropdown() {
       this.dropdownVisible = !this.dropdownVisible;
     },
+    logOut: function () {
+      authStore().clearUser();
+      router.push("/");
+      this.loggedin = false;
+    },
   },
   data() {
     return {
       dropdownVisible: false,
-      notLoggedIn: true,
+      loggedin: false,
     };
   },
 };
