@@ -6,25 +6,17 @@
     size="small"
     shape="circle"
   />
-  <Avatar
-    v-else
-    src="/path/to/user/pfp.jpg"
-    alt="User Profile Picture"
-    @click="toggleDropdown"
-    class="pi pi-user"
-    size="small"
-    shape="circle"
-  />
+  <Avatar v-else @click="toggleDropdown" size="small" shape="circle" />
   <div class="dropdownMenu" v-if="dropdownVisible">
     <RouterLink to="/profile" class="profile"><p>My Profile</p></RouterLink>
     <Divider class="divider" />
     <RouterLink to="/login"
-      ><p class="signIn" v-if="!loggedin">
+      ><p class="signIn">
         Log In
         <i class="pi-sign-in"></i>
       </p>
       >
-      <p class="signOut" v-if="loggedin" @click="logOut">
+      <p class="signOut">
         Log Out
         <i class="pi-sign-out"></i>
       </p>
@@ -33,6 +25,7 @@
 </template>
 
 <script>
+import { useAuthStore } from "@/stores/auth";
 import Divider from "primevue/divider";
 import Avatar from "primevue/avatar";
 import "primeicons/primeicons.css";
@@ -47,16 +40,10 @@ export default {
     toggleDropdown() {
       this.dropdownVisible = !this.dropdownVisible;
     },
-    logOut: function () {
-      authStore().clearUser();
-      router.push("/");
-      this.loggedin = false;
-    },
   },
   data() {
     return {
       dropdownVisible: false,
-      loggedin: false,
     };
   },
 };

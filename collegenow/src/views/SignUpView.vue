@@ -31,7 +31,7 @@
         @submit.prevent="
           calculateAge(birthdate),
             signup(age),
-            register(age, userPassword, userEmail)
+            authStore.register(age, userPassword, userEmail)
         "
         to="/login"
       />
@@ -50,10 +50,11 @@
 </template>
 
 <script>
-import { authStore } from "@/stores/auth";
+import { useAuthStore } from "@/stores/auth";
 import { ref } from "vue";
 import router from "../router/index";
 import Dropdown from "../components/DropDownMenu.vue";
+const authStore = useAuthStore();
 const age = ref("");
 const userEmail = ref("");
 const userPassword = ref("");
@@ -87,27 +88,6 @@ export default {
       } else {
         router.push("profile");
         return age, userPassword, userEmail;
-      }
-    },
-    async register(age, userPassword, userEmail, username, state) {
-      try {
-        const res = await fetch("http://localhost:5173/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: userEmail,
-            password: userPassword,
-            age: age,
-            username: username,
-            state: state,
-          }),
-        });
-        const user = await res.json();
-        console.log(user);
-      } catch (error) {
-        console.log(error);
       }
     },
   },
