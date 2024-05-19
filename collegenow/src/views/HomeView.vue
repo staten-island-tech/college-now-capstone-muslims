@@ -1,5 +1,5 @@
 <template>
-  <accountButton @click="checkUser" />
+  <accountButton />
   <div class="logo">
     <RouterLink class="router" to="/"
       ><button><img src="" alt="" /></button
@@ -9,7 +9,7 @@
   <img class="backgroundImage" src="" alt="" />
   <br />
   <div class="Posts">
-    <RouterLink class="router" to="/posts" @click="checkUser"
+    <RouterLink class="router" to="/posts"
       ><button>Posts <img src="" alt="" /></button
     ></RouterLink>
   </div>
