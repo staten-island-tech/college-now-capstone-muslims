@@ -27,7 +27,8 @@
 </template>
 
 <script>
-import { authStore } from "@/stores/auth";
+import { useAuthStore } from "@/stores/auth";
+const authStore = useAuthStore();
 export default {
   methods: {
     async login(a) {
@@ -39,13 +40,9 @@ export default {
       }
       // if userEmail or if userPassword don't match or if userEmail don't exist, write 2 else ifs, check tokens
       else {
-        signIn(userEmail, userPassword);
-        this.loggedin = true;
+        authStore.login();
       }
     },
-  },
-  data: {
-    loggedin: false,
   },
 };
 </script>
