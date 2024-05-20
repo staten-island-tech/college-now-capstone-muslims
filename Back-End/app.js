@@ -10,6 +10,7 @@ require("./DB/mongoose");
 const routes = require("./Routes/index");
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(express.urlencoded());
 app.use("/", routes);
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);

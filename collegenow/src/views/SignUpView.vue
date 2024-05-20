@@ -92,7 +92,7 @@ function signup(age) {
     alert("Password must contain at least 6 characters");
   } else if (18 > age) {
     alert("You must be 18 years old or older to use the application");
-  } else if (!userEmail.includes("@")) {
+  } else if (!userEmail.value.includes("@")) {
     alert("Email needs to include '@'");
   } else {
     router.push("profile");

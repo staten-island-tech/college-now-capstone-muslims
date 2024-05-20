@@ -46,6 +46,7 @@ exports.signup = async function (req, res) {
       newUser,
       token,
     });
+    console.log(newUser);
   }
 };
 
