@@ -1,15 +1,15 @@
 <template>
   <Avatar
-    v-if="$route.path === '/'"
-    @click="toggleDropdown"
-    class="pi pi-user"
+    v-if="$route.path !== '/' && currentUserImageURL"
+    :src="currentUserImageURL"
+    alt="User Uploaded Profile Picture"
     size="small"
     shape="circle"
+    @click="toggleDropdown"
   />
   <Avatar
     v-else
-    src="/path/to/user/pfp.jpg"
-    alt="User Profile Picture"
+    alt="Default Profile Picture"
     @click="toggleDropdown"
     class="pi pi-user"
     size="small"
@@ -18,17 +18,19 @@
   <div class="dropdownMenu" v-if="dropdownVisible">
     <RouterLink to="/profile" class="profile"><p>My Profile</p></RouterLink>
     <Divider class="divider" />
-    <RouterLink to="/login"
-      ><p class="signIn" v-if="!loggedin">
-        Log In
-        <i class="pi-sign-in"></i>
-      </p>
-      >
-      <p class="signOut" v-if="loggedin" @click="logOut">
+    <RouterLink @click="logOut" v-if="isLoggedIn">
+      <p class="signOut">
         Log Out
         <i class="pi-sign-out"></i>
       </p>
     </RouterLink>
+    <RouterLink to="/login" v-else>
+      <p class="signIn">
+        Log In
+        <i class="pi-sign-in"></i>
+      </p>
+      ></RouterLink
+    >
   </div>
 </template>
 
@@ -36,7 +38,9 @@
 import Divider from "primevue/divider";
 import Avatar from "primevue/avatar";
 import "primeicons/primeicons.css";
-
+import router from "../router";
+import { useAuthStore } from "../stores/auth";
+const authStore = useAuthStore();
 export default {
   name: "accountButton",
   components: {
@@ -48,16 +52,25 @@ export default {
       this.dropdownVisible = !this.dropdownVisible;
     },
     logOut: function () {
-      authStore().clearUser();
+      authStore.clearUser();
       router.push("/");
-      this.loggedin = false;
     },
   },
   data() {
     return {
       dropdownVisible: false,
-      loggedin: false,
     };
+  },
+  mounted() {
+    this.currentUserImageURL = authStore.currentUser?.imageURL;
+  },
+  computed: {
+    isLoggedIn() {
+      return authStore.isAuthenticated;
+    },
+    currentUserImageURL() {
+      return authStore.currentUser?.imageURL;
+    },
   },
 };
 </script>

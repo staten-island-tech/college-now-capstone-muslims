@@ -1,5 +1,9 @@
 <template>
-  <img class="backgroundImage" src="" alt="" />
+  <img
+    class="backgroundImage"
+    src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/large-group-of-pet-animals-together-susan-schmitz.jpg"
+    alt="background image featuring a bunch of pets"
+  />
   <div class="logo">
     <RouterLink class="router" to="/"
       ><button><img src="" alt="" /></button
@@ -17,7 +21,12 @@
         <div class="password">
           <input type="password" id="password" />
         </div>
-        <input type="submit" value="Log In" id="login" @click="login" />
+        <input
+          type="submit"
+          value="Log In"
+          id="login"
+          @click="authStore.login(a, username, password)"
+        />
       </div>
     </form>
     <div class="toSignUp">
@@ -29,22 +38,7 @@
 <script>
 import { useAuthStore } from "@/stores/auth";
 const authStore = useAuthStore();
-export default {
-  methods: {
-    async login(a) {
-      a.preventDefault();
-      let userEmail = document.getElementById("email").value;
-      let userPassword = document.getElementById("password").value;
-      if (userEmail === "" || userPassword === "") {
-        alert("Please fill out all fields");
-      }
-      // if userEmail or if userPassword don't match or if userEmail don't exist, write 2 else ifs, check tokens
-      else {
-        authStore.login();
-      }
-    },
-  },
-};
+export default {};
 </script>
 
 <style></style>

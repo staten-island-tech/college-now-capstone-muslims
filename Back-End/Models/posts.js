@@ -19,10 +19,10 @@ const petSchema = new mongoose.Schema({
   petPictures: {
     type: String,
   },
-  location: {
+  state: {
     type: String,
     trim: true,
-    required: "Please enter a location",
+    required: "Please enter a state",
   },
   slug: String,
 });

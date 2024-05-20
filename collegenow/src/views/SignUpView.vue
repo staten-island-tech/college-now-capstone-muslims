@@ -1,47 +1,44 @@
 <template>
   <div class="signUp">
     <h1 class="title">Sign Up</h1>
-    <form name="signupForm">
+    <form
+      name="signupForm"
+      @submit.prevent="authStore.register(...signup(calculateAge(birthdate)))"
+    >
       <h2 class="text">Username</h2>
       <div class="username">
-        <input type="text" id="username" />
+        <input type="text" id="username" v-model="username" />
       </div>
       <h2 class="text">Email</h2>
       <div class="email">
-        <input type="email" id="email" />
+        <input type="email" id="email" v-model="userEmail" />
       </div>
       <h2 class="text">Please enter your birthday</h2>
-      <div class="age"><input type="date" v-model="userBirthdate" /></div>
+      <div class="age"><input type="date" v-model="birthdate" /></div>
       <h2 class="text">Please select your state</h2>
       <div class="state">
-        <Dropdown />
+        <Dropdown @change="stateChanged" />
       </div>
       <h2 class="text">Password</h2>
       <div class="password">
-        <input type="password" id="password" />
+        <input type="password" id="password" v-model="userPassword" />
       </div>
       <h2 class="text">Re-enter your password</h2>
       <div class="password">
-        <input type="password" id="confirm" />
+        <input type="password" id="confirm" v-model="confpassword" />
       </div>
-      <input
-        type="submit"
-        value="Sign Up"
-        id="submit"
-        @submit.prevent="
-          calculateAge(birthdate),
-            signup(age),
-            authStore.register(age, userPassword, userEmail)
-        "
-        to="/login"
-      />
+      <button type="submit">Sign Up</button>
     </form>
     <div class="toLogin">
       Already have an account?
       <RouterLink to="/login">Login here</RouterLink>
     </div>
   </div>
-  <img class="backgroundImage" src="" alt="" />
+  <img
+    class="backgroundImage"
+    src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/large-group-of-pet-animals-together-susan-schmitz.jpg"
+    alt="background image featuring a bunch of pets"
+  />
   <div class="logo">
     <RouterLink class="router" to="/"
       ><button><img src="" alt="" /></button
@@ -49,54 +46,66 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { useAuthStore } from "@/stores/auth";
 import { ref } from "vue";
 import router from "../router/index";
 import Dropdown from "../components/DropDownMenu.vue";
 const authStore = useAuthStore();
-const age = ref("");
+const username = ref("");
 const userEmail = ref("");
 const userPassword = ref("");
-export default {
-  components: {
-    Dropdown,
-  },
-  methods: {
-    calculateAge(birthdate) {
-      const today = new Date();
-      const birthDate = new Date(birthdate);
-      let age = today.getFullYear() - birthDate.getFullYear();
-      const m = today.getMonth() - birthDate.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
-      return age;
-    },
-    async signup(age) {
-      let userEmail = document.getElementById("email").value;
-      let userPassword = document.getElementById("password").value;
-      let confpassword = document.getElementById("confirm").value;
-      if (userEmail === "" || userPassword === "" || confpassword === "") {
-        alert("Please fill out all fields");
-      } else if (userPassword != confpassword) {
-        alert("Your confirmed password does not match");
-      } else if (userPassword.length <= 5) {
-        alert("Password must contain at least 6 characters");
-      } else if (18 > age) {
-        alert("You must be 18 years old or older to use the application");
-      } else {
-        router.push("profile");
-        return age, userPassword, userEmail;
-      }
-    },
-  },
-  data() {
-    return {
-      userBirthdate: null,
-    };
-  },
-};
+const birthdate = ref("");
+const confpassword = ref("");
+const state = ref("");
+
+function calculateAge() {
+  const today = new Date();
+  const birthDate = new Date(birthdate.value);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+}
+
+function stateChanged(stateVal) {
+  if (typeof stateVal === "string") {
+    state.value = stateVal;
+  }
+}
+
+function signup(age) {
+  if (
+    userEmail.value === "" ||
+    userPassword.value === "" ||
+    confpassword.value === "" ||
+    state.value === "" ||
+    username.value === "" ||
+    age === ""
+  ) {
+    alert("Please fill out all fields");
+  } else if (userPassword.value != confpassword.value) {
+    alert("Your confirmed password does not match");
+  } else if (userPassword.value.length <= 5) {
+    alert("Password must contain at least 6 characters");
+  } else if (18 > age) {
+    alert("You must be 18 years old or older to use the application");
+  } else if (!userEmail.includes("@")) {
+    alert("Email needs to include '@'");
+  } else {
+    router.push("profile");
+    return [
+      age,
+      userPassword.value,
+      confpassword.value,
+      userEmail.value,
+      username.value,
+      state.value,
+    ];
+  }
+}
 </script>
 
 <style></style>

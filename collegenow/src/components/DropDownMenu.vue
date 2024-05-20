@@ -218,8 +218,13 @@ export default {
           abbreviation: "WY",
         },
       ],
-      selectedState: ``,
+      selectedState: "",
     };
+  },
+  watch: {
+    selectedState(newVal, oldVal) {
+      this.$emit("change", newVal);
+    },
   },
 };
 </script>

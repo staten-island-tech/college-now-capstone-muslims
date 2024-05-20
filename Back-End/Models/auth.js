@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 const bcrypt = require("bcryptjs");
 
 const authSchema = new Schema({
@@ -17,15 +17,11 @@ const authSchema = new Schema({
     type: String,
     required: true,
   },
-  confPassword: {
-    type: String,
-    required: true,
-  },
   age: {
     type: Number,
     required: true,
   },
-  location: {
+  state: {
     type: String,
     required: true,
   },
@@ -54,5 +50,5 @@ authSchema.methods.comparePassword = function (passw, cb) {
     cb(null, isMatch);
   });
 };
-
-module.exports = mongoose.model("auth", authSchema);
+let auth = mongoose.model("auth", authSchema);
+module.exports = auth;

@@ -11,6 +11,7 @@ const generateToken = async function (user) {
 };
 
 exports.signup = async function (req, res) {
+  console.log(req.body);
   if (!req.body.email) {
     res.json({ success: false, msg: "Please enter an email." });
   } else if (!req.body.username) {
@@ -19,7 +20,7 @@ exports.signup = async function (req, res) {
     res.json({ success: false, msg: "Please enter password." });
   } else if (!req.body.confpassword) {
     res.json({ success: false, msg: "Please confirm your password." });
-  } else if (req.bodyconfpassword != req.body.password) {
+  } else if (req.body.confpassword != req.body.password) {
     res.json({ success: false, msg: "Password does not match." });
   } else if (!req.body.age) {
     res.json({ success: false, msg: "Please enter your age." });
@@ -28,18 +29,17 @@ exports.signup = async function (req, res) {
       success: false,
       msg: "You must be over 18 to use this website.",
     });
-  } else if (!req.body.location) {
-    res.json({ success: false, msg: "Please enter a location." });
+  } else if (!req.body.state) {
+    res.json({ success: false, msg: "Please enter a state." });
   } else {
-    let newUser = new userAuth({
-      email: req.body.email,
-      username: req.body.username,
-      password: req.body.password,
-      age: req.body.age,
-      location: req.body.location,
-    });
+    let newUser = new userAuth(req.body);
+    try {
+      await newUser.save();
+    } catch (error) {
+      console.log(error);
+    }
     const token = await generateToken(newUser);
-    await newUser.save();
+
     res.json({
       success: true,
       msg: "Successfully created new user.",

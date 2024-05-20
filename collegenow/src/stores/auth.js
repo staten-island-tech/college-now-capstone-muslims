@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
 import router from "../router/index";
-export const useAuthStore = defineStore({
+export const useAuthStore = defineStore("auth", {
   id: "auth",
   state: () => {
     return {
@@ -9,20 +8,24 @@ export const useAuthStore = defineStore({
     };
   },
   actions: {
-    loadUser(user) {
-      this.currentUser = user;
-    },
-    clearUser() {
-      this.currentUser = null;
-    },
     checkUser() {
       if (useAuthStore().currentUser === null) {
         router.push("login");
       }
     },
-    async login(username, password) {
+    loadUser(user) {
+      this.currentUser = {
+        user,
+        imageURL: user.imageURL ? user.imageURL : null,
+      };
+    },
+    clearUser() {
+      this.currentUser = null;
+    },
+    async login(a, username, password) {
+      a.preventDefault();
       try {
-        const res = await fetch("http://localhost:5173/login", {
+        const res = await fetch("http://localhost:3000/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -36,15 +39,26 @@ export const useAuthStore = defineStore({
         if (res.ok) {
           this.loadUser(user);
         } else {
-          throw new Error(user.error);
+          let userEmail = document.getElementById("email").value;
+          let userPassword = document.getElementById("password").value;
+          if (userEmail === "" || userPassword === "") {
+            alert("Please fill out all fields");
+          }
         }
       } catch (error) {
         console.log(error);
       }
     },
-    async register(age, userPassword, userEmail, username, state) {
+    async register(
+      age,
+      userPassword,
+      confpassword,
+      userEmail,
+      username,
+      state
+    ) {
       try {
-        const res = await fetch("http://localhost:5173/signup", {
+        const res = await fetch("http://localhost:3000/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -52,6 +66,7 @@ export const useAuthStore = defineStore({
           body: JSON.stringify({
             email: userEmail,
             password: userPassword,
+            confpassword: confpassword,
             age: age,
             username: username,
             state: state,
@@ -67,6 +82,11 @@ export const useAuthStore = defineStore({
       } catch (error) {
         console.log(error);
       }
+    },
+  },
+  getters: {
+    isAuthenticated() {
+      return !!this.currentUser;
     },
   },
 });

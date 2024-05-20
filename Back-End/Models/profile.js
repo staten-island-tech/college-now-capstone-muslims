@@ -11,10 +11,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  location: {
+  state: {
     type: String,
     trim: true,
-    required: "Please enter your location",
+    required: "Please enter your state",
   },
   contactInfo: {
     type: String,
