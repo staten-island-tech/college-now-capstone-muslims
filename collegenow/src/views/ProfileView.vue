@@ -1,4 +1,10 @@
 <template>
+  <accountButton />
+  <div class="logo">
+    <RouterLink class="router" to="/"
+      ><button><img src="" alt="" /></button
+    ></RouterLink>
+  </div>
   <div class="profile">
     <button v-if="!editMode" @click="editProfile">Edit Profile</button>
     <button v-if="editMode" @click="confirmEdits">Confirm Edits</button>
@@ -16,11 +22,11 @@
       <img v-if="pfpImage" :src="pfpImage" class="pfp-image" />
     </div>
     <div class="email">
-      <label for="email">Email:</label>
+      <label for="email">Email: </label>
       <input type="text" id="email" v-model="tempEmail" :disabled="!editMode" />
     </div>
     <div class="username">
-      <label for="username">Username:</label>
+      <label for="username">Username: </label>
       <input
         type="text"
         id="username"
@@ -29,7 +35,7 @@
       />
     </div>
     <div class="phoneNumber">
-      <label for="phoneNumber">Phone Number:</label>
+      <label for="phoneNumber">Phone Number: </label>
       <input
         type="text"
         id="phoneNumber"
@@ -38,7 +44,7 @@
       />
     </div>
     <div class="decription">
-      <label for="description">Description:</label>
+      <label for="description">Description: </label>
       <input
         type="text"
         id="description"
@@ -46,24 +52,20 @@
         :disabled="!editMode"
       />
     </div>
-    <div class="location">
-      <label for="location">Location:</label>
-      <input
-        type="text"
-        id="location"
-        v-model="tempLocation"
-        :disabled="!editMode"
-      />
-    </div>
+    State: <Dropdown @change="stateChanged" :disabled="!editMode" />
   </div>
 </template>
 
 <script>
 import Avatar from "primevue/avatar";
 import "primeicons/primeicons.css";
+import Dropdown from "../components/DropDownMenu.vue";
+import accountButton from "../components/accountButton.vue";
 export default {
   components: {
     Avatar,
+    Dropdown,
+    accountButton,
   },
   data() {
     return {
@@ -110,6 +112,11 @@ export default {
       this.location = this.tempLocation;
       // Exit edit mode
       this.editMode = false;
+    },
+    stateChanged(stateVal) {
+      if (typeof stateVal === "string") {
+        state.value = stateVal;
+      }
     },
     async createProfile() {
       try {

@@ -36,8 +36,8 @@
   </div>
   <img
     class="backgroundImage"
-    src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/large-group-of-pet-animals-together-susan-schmitz.jpg"
-    alt="background image featuring a bunch of pets"
+    src="https://img.freepik.com/premium-photo/group-monkeys-standing-each-other-street-with-man-background-generative-ai_97167-5808.jpg"
+    alt="Background image featuring a bunch of monkeys"
   />
   <div class="logo">
     <RouterLink class="router" to="/"
@@ -86,14 +86,14 @@ function signup(age) {
     age === ""
   ) {
     alert("Please fill out all fields");
+  } else if (!userEmail.value.includes("@")) {
+    alert("Email needs to include '@'");
+  } else if (18 > age) {
+    alert("You must be 18 years old or older to use the application");
   } else if (userPassword.value != confpassword.value) {
     alert("Your confirmed password does not match");
   } else if (userPassword.value.length <= 5) {
     alert("Password must contain at least 6 characters");
-  } else if (18 > age) {
-    alert("You must be 18 years old or older to use the application");
-  } else if (!userEmail.value.includes("@")) {
-    alert("Email needs to include '@'");
   } else {
     router.push("profile");
     return [
@@ -108,4 +108,16 @@ function signup(age) {
 }
 </script>
 
-<style></style>
+<style>
+.backgroundImage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+}
+</style>

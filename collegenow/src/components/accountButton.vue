@@ -43,6 +43,7 @@ import { useAuthStore } from "../stores/auth";
 const authStore = useAuthStore();
 export default {
   name: "accountButton",
+  emits: ["accountClick"],
   components: {
     Avatar,
     Divider,
@@ -50,6 +51,7 @@ export default {
   methods: {
     toggleDropdown() {
       this.dropdownVisible = !this.dropdownVisible;
+      this.$emit("accountClick");
     },
     logOut: function () {
       authStore.clearUser();
