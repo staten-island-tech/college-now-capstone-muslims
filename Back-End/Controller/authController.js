@@ -11,43 +11,20 @@ const generateToken = async function (user) {
 };
 
 exports.signup = async function (req, res) {
-  console.log(req.body);
-  if (!req.body.email) {
-    res.json({ success: false, msg: "Please enter an email." });
-  } else if (!req.body.username) {
-    res.json({ success: false, msg: "Please enter username." });
-  } else if (!req.body.password) {
-    res.json({ success: false, msg: "Please enter password." });
-  } else if (!req.body.confpassword) {
-    res.json({ success: false, msg: "Please confirm your password." });
-  } else if (req.body.confpassword != req.body.password) {
-    res.json({ success: false, msg: "Password does not match." });
-  } else if (!req.body.age) {
-    res.json({ success: false, msg: "Please enter your age." });
-  } else if (req.body.age < 18) {
-    res.json({
-      success: false,
-      msg: "You must be over 18 to use this website.",
-    });
-  } else if (!req.body.state) {
-    res.json({ success: false, msg: "Please enter a state." });
-  } else {
-    let newUser = new userAuth(req.body);
-    try {
-      await newUser.save();
-    } catch (error) {
-      console.log(error);
-    }
-    const token = await generateToken(newUser);
-
-    res.json({
-      success: true,
-      msg: "Successfully created new user.",
-      newUser,
-      token,
-    });
-    console.log(newUser);
+  let newUser = new userAuth(req.body);
+  try {
+    await newUser.save();
+  } catch (error) {
+    console.log(error);
   }
+  const token = await generateToken(newUser);
+  res.json({
+    success: true,
+    msg: "Successfully created new user.",
+    newUser,
+    token,
+  });
+  console.log(newUser);
 };
 
 exports.login = async (req, res) => {
