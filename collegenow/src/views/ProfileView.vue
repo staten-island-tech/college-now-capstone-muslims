@@ -120,7 +120,7 @@ export default {
     },
     async createProfile() {
       try {
-        const res = await fetch("http://localhost:5173/createProfile", {
+        const res = await fetch("http://localhost:3000/createProfile", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -136,7 +136,7 @@ export default {
 
     async updateProfiles() {
       try {
-        const res = await fetch("http://localhost:5173/updateProfiles/:id", {
+        const res = await fetch("http://localhost:3000/updateProfiles/:id", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
