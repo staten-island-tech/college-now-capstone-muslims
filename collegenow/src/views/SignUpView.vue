@@ -95,12 +95,7 @@ function signup(age) {
   } else if (userPassword.value.length <= 5) {
     alert("Password must contain at least 6 characters");
   } else {
-    
-    router.push({
-      name: 'Profile',
-      params: { username: username.value },
-      query: { email: userEmail.value }
-    })
+    router.push("profile");
     return [
       age,
       userPassword.value,
