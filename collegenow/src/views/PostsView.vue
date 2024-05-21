@@ -52,7 +52,7 @@ export default {
     },
     async createPost(Name, ownerName, number, Description) {
       try {
-        const res = await fetch("http://localhost:3000/createPost", {
+        const res = await fetch("http://localhost:5173/createPost", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -73,7 +73,7 @@ export default {
 
     async deletePosts(username, password) {
       try {
-        const res = await fetch("http://localhost:3000/deletePosts/:id", {
+        const res = await fetch("http://localhost:5173/deletePosts/:id", {
           method: "DEL",
           headers: {
             "Content-Type": "application/json",

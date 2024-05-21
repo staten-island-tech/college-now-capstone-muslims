@@ -25,7 +25,7 @@ export const useAuthStore = defineStore("auth", {
     async login(a, username, password) {
       a.preventDefault();
       try {
-        const res = await fetch("http://localhost:3000/login", {
+        const res = await fetch("http://localhost:5173/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -43,6 +43,7 @@ export const useAuthStore = defineStore("auth", {
           let userPassword = document.getElementById("password").value;
           if (userEmail === "" || userPassword === "") {
             alert("Please fill out all fields");
+            //fix this part
           }
         }
       } catch (error) {
@@ -58,7 +59,7 @@ export const useAuthStore = defineStore("auth", {
       state
     ) {
       try {
-        const res = await fetch("http://localhost:3000/signup", {
+        const res = await fetch("http://localhost:5173/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
