@@ -2,7 +2,11 @@
   <accountButton />
   <div class="logo">
     <RouterLink class="router" to="/"
-      ><button><img src="" alt="" /></button
+      ><button>
+        <img
+          src="https://cdn.discordapp.com/attachments/1025570390656962642/1242347460450586716/PINDER.jpg?ex=664d81bc&is=664c303c&hm=d8e1c1546588c4ab3baa530a0a8f32753d2ca174b102fc6b18a7f7be34418658&"
+          alt="Logo with a monkey wearing sunglasses"
+        /></button
     ></RouterLink>
   </div>
   <div class="profile">
@@ -84,21 +88,21 @@ export default {
     },
     initialTempUsername() {
       return this.$route.params.username;
-    }
+    },
   },
   watch: {
-    '$route.query': {
+    "$route.query": {
       handler(newQuery) {
         this.tempEmail = newQuery.email;
       },
-      immediate: true
+      immediate: true,
     },
-    '$route.params': {
+    "$route.params": {
       handler(newParams) {
         this.tempUsername = newParams.username;
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   mounted() {
     // Set the initial values when the component mounts
@@ -141,7 +145,12 @@ export default {
       const updatedDescription = this.tempDescription;
       const updatedLocation = this.tempLocation;
 
-      this.updateProfiles(updatedUsername, updatedPhoneNumber, updatedDescription, updatedLocation);
+      this.updateProfiles(
+        updatedUsername,
+        updatedPhoneNumber,
+        updatedDescription,
+        updatedLocation
+      );
       // Exit edit mode
       this.editMode = false;
     },
