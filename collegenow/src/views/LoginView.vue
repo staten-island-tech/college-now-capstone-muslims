@@ -52,5 +52,6 @@ export default {};
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0.5;
+  z-index: -1;
 }
 </style>

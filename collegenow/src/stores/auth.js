@@ -43,6 +43,7 @@ export const useAuthStore = defineStore("auth", {
           let userPassword = document.getElementById("password").value;
           if (userEmail === "" || userPassword === "") {
             alert("Please fill out all fields");
+            //fix this part
           }
         }
       } catch (error) {
