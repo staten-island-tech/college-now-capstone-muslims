@@ -22,6 +22,10 @@
       accept="image/*"
     >
     </FileUpload>
+    <div class="phoneNumber">
+      <label for="phoneNumber">Phone Number:</label>
+      <input v-model="phoneNumber" type="text" @input="acceptNumber">
+    </div>
     <textarea
       v-model="description"
       placeholder="Write a description..."
@@ -47,6 +51,7 @@ export default {
   },
   data() {
     return {
+      phoneNumber: "",
       postName: "",
       postOwnerName: "",
       postNumber: "",
@@ -55,11 +60,15 @@ export default {
       files: [],
       description: "",
       selectedAnimal: "",
-      animalTypes: ["Dog", "Cat", "Bird", "Fish", "Rabbit"], // Add more animal types as needed
+      animalType: ["Dog", "Cat", "Monkey"], // Add more animal types as needed
       visible: false,
     };
   },
   methods: {
+    acceptNumber() {
+        var x = this.phoneNumber.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+        this.phoneNumber = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+    },
     handleFileUpload(event) {
       // Retrieve the uploaded files
       this.files = event.target.files;

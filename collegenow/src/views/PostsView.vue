@@ -50,45 +50,6 @@ export default {
       // Add the new post to the posts array
       this.posts.push(postData);
     },
-    async createPost(Name, ownerName, number, Description) {
-      try {
-        const res = await fetch("http://localhost:3000/createPost", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            Name: Name,
-            ownerName: ownerName,
-            number: number,
-            Description: Description,
-          }),
-        });
-        const user = await res.json();
-        console.log(user);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    async deletePosts(username, password) {
-      try {
-        const res = await fetch("http://localhost:3000/deletePosts/:id", {
-          method: "DEL",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: username.toLowerCase(),
-            password: password,
-          }),
-        });
-        const user = await res.json();
-        console.log(user);
-      } catch (error) {
-        console.log(error);
-      }
-    },
   },
 };
 </script>

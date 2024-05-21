@@ -78,6 +78,33 @@ export default {
       pfpImage: null,
     };
   },
+  computed: {
+    initialTempEmail() {
+      return this.$route.query.email;
+    },
+    initialTempUsername() {
+      return this.$route.params.username;
+    }
+  },
+  watch: {
+    '$route.query': {
+      handler(newQuery) {
+        this.tempEmail = newQuery.email;
+      },
+      immediate: true
+    },
+    '$route.params': {
+      handler(newParams) {
+        this.tempUsername = newParams.username;
+      },
+      immediate: true
+    }
+  },
+  mounted() {
+    // Set the initial values when the component mounts
+    this.tempEmail = this.initialTempEmail;
+    this.tempUsername = this.initialTempUsername;
+  },
   methods: {
     handleProfilePictureUpload(event) {
       const file = event.target.files[0];
@@ -96,7 +123,6 @@ export default {
     },
     editProfile() {
       // Enter edit mode
-      this.tempEmail = this.email;
       this.tempUsername = this.username;
       this.tempPhoneNumber = this.phoneNumber;
       this.tempDescription = this.description;
@@ -105,48 +131,23 @@ export default {
     },
     confirmEdits() {
       // Save changes
-      this.email = this.tempEmail;
       this.username = this.tempUsername;
       this.phoneNumber = this.tempPhoneNumber;
       this.description = this.tempDescription;
       this.location = this.tempLocation;
+
+      const updatedUsername = this.tempUsername;
+      const updatedPhoneNumber = this.tempPhoneNumber;
+      const updatedDescription = this.tempDescription;
+      const updatedLocation = this.tempLocation;
+
+      this.updateProfiles(updatedUsername, updatedPhoneNumber, updatedDescription, updatedLocation);
       // Exit edit mode
       this.editMode = false;
     },
     stateChanged(stateVal) {
       if (typeof stateVal === "string") {
         state.value = stateVal;
-      }
-    },
-    async createProfile() {
-      try {
-        const res = await fetch("http://localhost:3000/createProfile", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-        const user = await res.json();
-        console.log(user);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    async updateProfiles() {
-      try {
-        const res = await fetch("http://localhost:3000/updateProfiles/:id", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-        const user = await res.json();
-        console.log(user);
-      } catch (error) {
-        console.log(error);
       }
     },
   },
