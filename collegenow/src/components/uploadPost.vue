@@ -14,14 +14,16 @@
       <option disabled value="">Please select an option</option>
       <option v-for="animal in animalTypes" :key="animal">{{ animal }}</option>
     </select>
-    <FileUpload
+    <div class="postImage">
+      <FileUpload
       name="fileUpload[]"
       url=""
       @upload=""
       :multiple="true"
       accept="image/*"
-    >
-    </FileUpload>
+      >
+      </FileUpload>
+    </div>
     <div class="phoneNumber">
       <label for="phoneNumber">Phone Number:</label>
       <input v-model="phoneNumber" type="text" @input="acceptNumber" />
@@ -52,6 +54,7 @@ export default {
   },
   data() {
     return {
+      postImage: [],
       phoneNumber: "",
       postName: "",
       postOwnerName: "",

@@ -6,7 +6,7 @@
 import { onMounted, ref } from "vue";
 const shops = ref("");
 async function getShops() {
-  let res = await fetch("http://localhost:3000"); //put your own api here, put it based off uploaded photos
+  let res = await fetch("http://localhost:3000"); 
 
   let data = await res.json();
   shops.value = data;

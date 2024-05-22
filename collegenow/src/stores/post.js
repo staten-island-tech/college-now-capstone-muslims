@@ -11,7 +11,9 @@ export const authStore = defineStore({
       number,
       Description,
       animalType,
-      phoneNumber
+      phoneNumber,
+      postImage,
+
     ) {
       try {
         const res = await fetch("http://localhost:3000/createPost", {
@@ -26,6 +28,7 @@ export const authStore = defineStore({
             Description: Description,
             animalType: animalType,
             phoneNumber: phoneNumber,
+            postImage: postImage,
           }),
         });
         const user = await res.json();
