@@ -1,6 +1,5 @@
 <template>
   <accountButton @accountClick="checkUser" />
-
   <RouterLink class="router" to="/"
     ><button>
       <img
@@ -9,7 +8,7 @@
         alt="Logo with a monkey wearing sunglasses"
       /></button
   ></RouterLink>
-
+  <br />
   <img
     class="backgroundImage"
     src="https://img.freepik.com/premium-photo/group-monkeys-standing-each-other-street-with-man-background-generative-ai_97167-5808.jpg"
