@@ -24,11 +24,12 @@
     </FileUpload>
     <div class="phoneNumber">
       <label for="phoneNumber">Phone Number:</label>
-      <input v-model="phoneNumber" type="text" @input="acceptNumber">
+      <input v-model="phoneNumber" type="text" @input="acceptNumber" />
     </div>
     <textarea
       v-model="description"
       placeholder="Write a description..."
+      maxlength="500"
     ></textarea>
     <button severity="secondary" @click="visible = false">Cancel</button>
     <button @click="submitPost, (visible = false)">Post</button>
@@ -66,8 +67,12 @@ export default {
   },
   methods: {
     acceptNumber() {
-        var x = this.phoneNumber.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-        this.phoneNumber = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+      var x = this.phoneNumber
+        .replace(/\D/g, "")
+        .match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+      this.phoneNumber = !x[2]
+        ? x[1]
+        : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
     },
     handleFileUpload(event) {
       // Retrieve the uploaded files

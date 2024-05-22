@@ -1,6 +1,6 @@
 <template>
   <Avatar
-    v-if="$route.path !== '/' && currentUserImageURL"
+    v-if="$route.path !== '/'"
     :src="currentUserImageURL"
     alt="User Uploaded Profile Picture"
     size="small"

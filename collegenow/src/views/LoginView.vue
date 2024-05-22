@@ -17,20 +17,21 @@
     <h1>Login</h1>
     <form>
       <div class="loginForm">
-        <h2 class="text">Email</h2>
-        <div class="email">
-          <input type="email" id="email" />
+        <h2 class="text">Username</h2>
+        <div class="username">
+          <input type="text" />
         </div>
         <h2 class="text">Password</h2>
         <div class="password">
-          <input type="password" id="password" />
+          <input type="password" />
         </div>
-        <input
+        <button
           type="submit"
-          value="Log In"
           id="login"
-          @click="authStore.login(a, username, password)"
-        />
+          @click="authStore.login(...loginCheck(a))"
+        >
+          Log In
+        </button>
       </div>
     </form>
     <div class="toSignUp">
@@ -41,8 +42,19 @@
 
 <script>
 import { useAuthStore } from "@/stores/auth";
+import { ref } from "vue";
 const authStore = useAuthStore();
-export default {};
+const username = ref("");
+const userPassword = ref("");
+function loginCheck(a) {
+  a.preventDefault();
+  if (username.value === "" || userPassword.value === "") {
+    alert("Please fill out all fields");
+  } else {
+    router.push("posts");
+    return [userPassword.value, username.value];
+  }
+}
 </script>
 
 <style>

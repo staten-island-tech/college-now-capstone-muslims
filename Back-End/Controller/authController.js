@@ -3,31 +3,22 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const generateToken = async function (user) {
-  const token = jwt.sign(
-    { _id: user._id },
-    "mongodb+srv://Ucheong:fORtIl08bOaGEl7J@cluster0.swvkl6f.mongodb.net/",
-    {
-      expiresIn: 60 * 60,
-    }
-  );
+  const token = jwt.sign({ _id: user._id }, `${process.env.SECRET}`, {
+    expiresIn: 60 * 60,
+  });
   return token;
 };
 
 exports.signup = async function (req, res) {
   let newUser = new userAuth(req.body);
-  try {
-    await newUser.save();
-  } catch (error) {
-    console.log(error);
-  }
   const token = await generateToken(newUser);
-  res.json({
+  await newUser.save();
+  return res.json({
     success: true,
     msg: "Successfully created new user.",
     newUser,
     token,
   });
-  console.log(newUser);
 };
 
 exports.login = async (req, res) => {
@@ -41,13 +32,11 @@ exports.login = async (req, res) => {
     const pwMatch = await bcrypt.compare(password, user.password);
     const token = await generateToken(user);
     if (!pwMatch) {
-      throw new Error(
-        "Wrong password. Try again or click Forgot password to reset it."
-      );
+      throw new Error("Wrong password. Please try again.");
     }
     let dataSent = {
-      email: user.email,
       username: user.username,
+      password: user.password,
     };
     res.send({ dataSent, token });
   } catch (error) {
@@ -58,10 +47,7 @@ exports.login = async (req, res) => {
 exports.authCheck = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
-    const decoded = jwt.verify(
-      token,
-      "mongodb+srv://Ucheong:fORtIl08bOaGEl7J@cluster0.swvkl6f.mongodb.net/"
-    );
+    const decoded = jwt.verify(token, `${process.env.SECRET}`);
     const user = await userAuth.findOne({
       _id: decoded._id,
     });

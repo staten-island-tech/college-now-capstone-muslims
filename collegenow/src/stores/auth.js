@@ -16,14 +16,13 @@ export const useAuthStore = defineStore("auth", {
     loadUser(user) {
       this.currentUser = {
         user,
-        imageURL: user.imageURL ? user.imageURL : null,
+        // imageURL: user.imageURL ? user.imageURL : null,
       };
     },
     clearUser() {
       this.currentUser = null;
     },
-    async login(a, username, password) {
-      a.preventDefault();
+    async login(username, userPassword) {
       try {
         const res = await fetch("http://localhost:3000/login", {
           method: "POST",
@@ -32,19 +31,15 @@ export const useAuthStore = defineStore("auth", {
           },
           body: JSON.stringify({
             username: username.toLowerCase(),
-            password: password,
+            password: userPassword,
           }),
         });
         const user = await res.json();
         if (res.ok) {
           this.loadUser(user);
+          console.log(user);
         } else {
-          let userEmail = document.getElementById("email").value;
-          let userPassword = document.getElementById("password").value;
-          if (userEmail === "" || userPassword === "") {
-            alert("Please fill out all fields");
-            //fix this part
-          }
+          throw new Error(user.error);
         }
       } catch (error) {
         console.log(error);
