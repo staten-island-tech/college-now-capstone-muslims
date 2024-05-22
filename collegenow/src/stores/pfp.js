@@ -18,7 +18,7 @@ export const profileStore = defineStore({
           },
           body: JSON.stringify({
             intitalEmail: initialTempEmail,
-            intitalUsername: initialTempUsername
+            intitalUsername: initialTempUsername,
           }),
         });
         const user = await res.json();
@@ -27,7 +27,12 @@ export const profileStore = defineStore({
         console.log(error);
       }
     },
-    async updateProfiles(updatedUsername, updatedPhoneNumber, updatedDescription, updatedLocation) {
+    async updateProfiles(
+      updatedUsername,
+      updatedPhoneNumber,
+      updatedDescription,
+      updatedLocation
+    ) {
       try {
         const res = await fetch("http://localhost:3000/updateProfiles/:id", {
           method: "PATCH",

@@ -5,7 +5,14 @@ export const authStore = defineStore({
     return {};
   },
   actions: {
-    async createPost(Name, ownerName, number, Description, animalType, phoneNumber) {
+    async createPost(
+      Name,
+      ownerName,
+      number,
+      Description,
+      animalType,
+      phoneNumber
+    ) {
       try {
         const res = await fetch("http://localhost:3000/createPost", {
           method: "POST",
