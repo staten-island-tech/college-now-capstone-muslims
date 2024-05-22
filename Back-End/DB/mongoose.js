@@ -1,11 +1,7 @@
 const mongoose = require("mongoose");
 mongoose
   .connect(
-    "mongodb://atlas-sql-664d127f59f74e290248c4c1-frfqx.a.query.mongodb.net/CollegeNow?ssl=true&authSource=admin",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
+    "mongodb://atlas-sql-664d127f59f74e290248c4c1-frfqx.a.query.mongodb.net/CollegeNow?ssl=true&authSource=admin"
   )
   .then(() => console.log("connected to DB"));
 
