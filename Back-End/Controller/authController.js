@@ -1,12 +1,15 @@
 const userAuth = require("../Models/auth");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-require("dotenv").config({ path: "variables.env" });
 
 const generateToken = async function (user) {
-  const token = jwt.sign({ _id: user._id }, `${process.env.SECRET}`, {
-    expiresIn: 60 * 60,
-  });
+  const token = jwt.sign(
+    { _id: user._id },
+    "mongodb://atlas-sql-664d127f59f74e290248c4c1-frfqx.a.query.mongodb.net/CollegeNow?ssl=true&authSource=admin",
+    {
+      expiresIn: 60 * 60,
+    }
+  );
   return token;
 };
 
@@ -55,7 +58,10 @@ exports.login = async (req, res) => {
 exports.authCheck = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
-    const decoded = jwt.verify(token, `${process.env.SECRET}`);
+    const decoded = jwt.verify(
+      token,
+      "mongodb://atlas-sql-664d127f59f74e290248c4c1-frfqx.a.query.mongodb.net/CollegeNow?ssl=true&authSource=admin"
+    );
     const user = await userAuth.findOne({
       _id: decoded._id,
     });

@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
-require("dotenv").config({ path: "variables.env" });
-console.log(process.env.DATABASE);
 mongoose
-  .connect(`${process.env.DATABASE}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb://atlas-sql-664d127f59f74e290248c4c1-frfqx.a.query.mongodb.net/CollegeNow?ssl=true&authSource=admin",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => console.log("connected to DB"));
 
 mongoose.connection.on("error", (err) => {
