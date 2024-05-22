@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const generateToken = async function (user) {
   const token = jwt.sign(
     { _id: user._id },
-    "mongodb://atlas-sql-664d127f59f74e290248c4c1-frfqx.a.query.mongodb.net/CollegeNow?ssl=true&authSource=admin",
+    "mongodb+srv://Ucheong:fORtIl08bOaGEl7J@cluster0.swvkl6f.mongodb.net/",
     {
       expiresIn: 60 * 60,
     }
@@ -60,7 +60,7 @@ exports.authCheck = async (req, res, next) => {
     const token = req.header("Authorization").replace("Bearer ", "");
     const decoded = jwt.verify(
       token,
-      "mongodb://atlas-sql-664d127f59f74e290248c4c1-frfqx.a.query.mongodb.net/CollegeNow?ssl=true&authSource=admin"
+      "mongodb+srv://Ucheong:fORtIl08bOaGEl7J@cluster0.swvkl6f.mongodb.net/"
     );
     const user = await userAuth.findOne({
       _id: decoded._id,
