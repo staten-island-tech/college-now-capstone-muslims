@@ -4,11 +4,10 @@
     src="https://img.freepik.com/premium-photo/group-monkeys-standing-each-other-street-with-man-background-generative-ai_97167-5808.jpg"
     alt="Background image featuring a bunch of monkeys"
   />
-  <div>
+  <div class="logo">
     <RouterLink class="router" to="/"
       ><button>
         <img
-          class="logo"
           src="https://cdn.discordapp.com/attachments/1025570390656962642/1242347460450586716/PINDER.jpg?ex=664d81bc&is=664c303c&hm=d8e1c1546588c4ab3baa530a0a8f32753d2ca174b102fc6b18a7f7be34418658&"
           alt="Logo with a monkey wearing sunglasses"
         /></button
