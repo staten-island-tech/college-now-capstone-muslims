@@ -1,35 +1,38 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
 
-const userSchema = new mongoose.Schema({
+const profileSchema = new mongoose.Schema({
   username: {
     type: String,
     trim: true,
-    required: "Please enter a username!",
+    required: true,
   },
   description: {
     type: String,
     trim: true,
+    required: true,
   },
   state: {
     type: String,
     trim: true,
-    required: "Please enter your state",
+    required: true,
   },
   contactInfo: {
     type: String,
-    required: "Please at least an email or a phone number",
+    required: true,
   },
   profilePicture: {
     type: Buffer,
+    required: true,
   },
   petPictures: {
     type: Buffer,
+    required: true,
   },
   slug: String,
 });
 
-userSchema.pre("save", function (next) {
+profileSchema.pre("save", function (next) {
   if (!this.isModified("name")) {
     next();
     return;
@@ -38,4 +41,4 @@ userSchema.pre("save", function (next) {
   next();
 });
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("profile", profileSchema);

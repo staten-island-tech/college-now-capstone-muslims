@@ -53,19 +53,6 @@ exports.createPost = async (req, res) => {
     }
   };
   
-  exports.updatePost = async (req, res) => {
-    try {
-      //find the store then update the store
-      const post = await userPosts.findById(req.params.id);
-      const updates = Object.keys(req.body);
-      updates.forEach((update) => (post[update] = req.body[update]));
-      await post.save();
-      res.json(post);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
   exports.deletePost = async (req, res) => {
     try {
       const post = await userPosts.findByIdAndDelete(req.params.id);

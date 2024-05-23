@@ -1,37 +1,49 @@
 import { defineStore } from "pinia";
-export const postStore = defineStore("post", {
-  id: "post",
-  state: () => {
-    return {};
-  },
+
+export const usePostStore = defineStore("post", {
+  state: () => ({
+    currentPost: null,
+    posts: [],
+  }),
   actions: {
-    async createPost(
-      Name,
-      ownerName,
-      number,
-      Description,
-      animalType,
-      phoneNumber,
-      postImage
-    ) {
+    loadPost(post) {
+      this.currentPost = post;
+    },
+    deletePost() {
+      this.currentPost = null;
+    },
+    async createPost(petName, petAge, ownerName, phoneNumber, description, animalType, postImage) {
       try {
-        const res = await fetch("http://localhost:3000/createPost", {
+        const res = await fetch("http://localhost:3000/posts", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            Name: Name,
-            ownerName: ownerName,
-            number: number,
-            Description: Description,
-            animalType: animalType,
-            phoneNumber: phoneNumber,
-            postImage: postImage,
+            petName,
+            petAge,
+            ownerName,
+            phoneNumber,
+            description,
+            animalType,
+            postImage,
           }),
         });
-        const user = await res.json();
-        console.log(user);
+        const post = await res.json();
+        if (res.ok) {
+          this.loadPost(post);
+          console.log(post);
+        } else {
+          throw new Error(post.error);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async fetchPosts() {
+      try {
+        const res = await fetch("http://localhost:3000/posts");
+        this.posts = await res.json();
       } catch (error) {
         console.log(error);
       }
@@ -45,7 +57,7 @@ export const postStore = defineStore("post", {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            username: username.toLowerCase(),
+            username: username.toLowerCase(),   
             password: password,
           }),
         });

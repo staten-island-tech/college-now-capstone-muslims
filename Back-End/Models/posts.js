@@ -1,44 +1,50 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
 
-const petSchema = new mongoose.Schema({
-  Name: {
+const postSchema = new mongoose.Schema({
+  petName: {
     type: String,
     trim: true,
-    required: "Please enter a your pet's name!",
+    required: true,
+  },
+  petAge: {
+    type: Number,
+    required: true,
   },
   description: {
     type: String,
     trim: true,
+    required: true,
   },
   ownerName: {
     type: String,
     trim: true,
-    required: "Please enter a the owner's name",
+    required: true,
   },
   postImage: {
     type: String,
+    required: true,
   },
   phoneNumber: {
     type: String,
     trim: true,
-    required: "Please enter a your phone number",
+    required: true,
   },
   animalType: {
     type: String,
     trim: true,
-    required: "",
+    required: true,
   },
-  
   slug: String,
 });
-petSchema.pre("save", function (next) {
-  if (!this.isModified("name")) {
+
+postSchema.pre("save", function (next) {
+  if (!this.isModified("petName")) {
     next();
     return;
   }
-  this.slug = slugify(this.name);
+  this.slug = slugify(this.petName, { lower: true });
   next();
 });
 
-module.exports = mongoose.model("pet", petSchema);
+module.exports = mongoose.model("Post", postSchema);

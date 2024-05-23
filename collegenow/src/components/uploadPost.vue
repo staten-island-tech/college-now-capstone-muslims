@@ -3,26 +3,25 @@
   <Dialog v-model:visible="visible">
     <div class="petName">
       <label for="petName">Pet Name:</label>
-      <input type="text" id="petName" />
+      <input v-model="petName" type="text" id="petName" />
     </div>
     <div class="petAge">
       <label for="petAge">Pet Age:</label>
-      <input type="text" id="petAge" />
+      <input v-model="petAge" type="text" id="petAge" />
     </div>
     <label for="animalType">Select an animal type:</label>
     <select v-model="selectedAnimal" id="animalType">
       <option disabled value="">Please select an option</option>
-      <option v-for="animal in animalTypes" :key="animal">{{ animal }}</option>
+      <option v-for="animal in animalType" :key="animal">{{ animal }}</option>
     </select>
     <div class="postImage">
       <FileUpload
-      name="fileUpload[]"
-      url=""
-      @upload=""
-      :multiple="true"
-      accept="image/*"
-      >
-      </FileUpload>
+        name="fileUpload[]"
+        url=""
+        @upload=""
+        :multiple="true"
+        accept="image/*"
+      />
     </div>
     <div class="phoneNumber">
       <label for="phoneNumber">Phone Number:</label>
@@ -33,37 +32,31 @@
       placeholder="Write a description..."
       maxlength="500"
     ></textarea>
-    <button severity="secondary" @click="visible = false">Cancel</button>
-    <button @click="submitPost, (visible = false)">Post</button>
+    <button @click="visible = false">Cancel</button>
+    <button @click="submitPost">Post</button>
   </Dialog>
-  <br />
 </template>
 
 <script>
-//add more parts like email and contact info into the template
+import { usePostStore } from "@/stores/post";
 import Dialog from "primevue/dialog";
-import Post from "./Post.vue";
 import FileUpload from "primevue/fileupload";
-//ask to put email, number in the container where you upload a post
+
 export default {
   name: "uploadPost",
   components: {
-    Post,
     Dialog,
     FileUpload,
   },
   data() {
     return {
-      postImage: [],
+      petName: "",
+      petAge: "",
+      ownerName: "",
       phoneNumber: "",
-      postName: "",
-      postOwnerName: "",
-      postNumber: "",
-      postDescription: "",
-      showPost: false,
-      files: [],
       description: "",
       selectedAnimal: "",
+      postImage: "",
       animalType: ["Dog", "Cat", "Monkey"], // Add more animal types as needed
       visible: false,
     };
@@ -77,24 +70,28 @@ export default {
         ? x[1]
         : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
     },
-    handleFileUpload(event) {
-      // Retrieve the uploaded files
-      this.files = event.target.files;
-    },
-    submitPost() {
-      // Emit an event with the uploaded files and description
-      this.$emit("submitPost", {
-        name: "Name", // Adjust as needed
-        ownerName: "Owner Name", // Adjust as needed
-        number: "Number", // Adjust as needed
-        description: this.description,
-        images: this.files,
-      });
-      // Clear input fields after submission if needed
-      this.files = [];
+    async submitPost() {
+      const postStore = usePostStore();
+      await postStore.createPost(
+        this.petName,
+        this.petAge,
+        this.ownerName,
+        this.phoneNumber,
+        this.description,
+        this.selectedAnimal,
+        this.postImage
+      );
+      this.visible = false;
+      // Clear input fields after submission
+      this.petName = "";
+      this.petAge = "";
+      this.ownerName = "";
+      this.phoneNumber = "";
       this.description = "";
-    },
-  },
+      this.selectedAnimal = "";
+      this.postImage = "";
+    }
+  }
 };
 </script>
 

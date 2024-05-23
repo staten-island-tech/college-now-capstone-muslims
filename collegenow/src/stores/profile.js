@@ -11,7 +11,7 @@ export const profileStore = defineStore("profile", {
 
     async createProfile(initialTempEmail, initialTempUsername) {
       try {
-        const res = await fetch("http://localhost:3000/createProfile", {
+        const res = await fetch("http://localhost:3000/profile", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

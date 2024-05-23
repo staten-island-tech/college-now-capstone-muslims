@@ -4,18 +4,12 @@ const profileController = require("../Controller/profileController");
 const postController = require("../Controller/postController");
 const authController = require("../Controller/authController");
 
-router.get("/", profileController.homePage);
-router.get("/", postController.homePage);
+router.post("/profile", profileController.createProfile);
+router.patch("/profile/:id", profileController.updateProfile);
 
-router.post("/createProfile", profileController.createProfile);
-router.get("/profile", profileController.getProfile);
-router.patch("/updateProfile/:id", profileController.updateProfile);
-router.delete("/deleteProfile/:id", profileController.deleteProfile);
-
-router.post("/createPost", postController.createPost);
+router.post("/posts", postController.createPost);
 router.get("/posts", postController.getPost);
-router.patch("/updatePost/:id", postController.updatePost);
-router.delete("/deletePost/:id", postController.deletePost);
+router.delete("/posts/:id", postController.deletePost);
 
 router.post("/signup", authController.signup);
 router.post("/login", authController.login);
