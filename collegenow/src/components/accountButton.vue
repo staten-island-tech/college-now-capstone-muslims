@@ -9,7 +9,7 @@
   />
   <Avatar
     v-else
-    alt="Default Profile Picture"
+    alt="Default Profile Picture."
     @click="toggleDropdown"
     class="pi pi-user"
     size="small"
