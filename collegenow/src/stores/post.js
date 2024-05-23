@@ -12,7 +12,15 @@ export const usePostStore = defineStore("post", {
     deletePost() {
       this.currentPost = null;
     },
-    async createPost(petName, petAge, ownerName, phoneNumber, description, animalType, postImage) {
+    async createPost(
+      petName,
+      petAge,
+      ownerName,
+      phoneNumber,
+      description,
+      animalType,
+      postImage
+    ) {
       try {
         const res = await fetch("http://localhost:3000/posts", {
           method: "POST",
@@ -57,7 +65,7 @@ export const usePostStore = defineStore("post", {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            username: username.toLowerCase(),   
+            username: username,
             password: password,
           }),
         });
