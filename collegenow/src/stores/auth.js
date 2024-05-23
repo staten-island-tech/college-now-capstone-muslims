@@ -32,7 +32,7 @@ export const useAuthStore = defineStore("auth", {
         const user = await res.json();
         if (res.ok) {
           this.loadUser(user);
-          router.push("profile");
+          router.push("posts");
           console.log(user);
         } else {
           throw new Error(user.error);
