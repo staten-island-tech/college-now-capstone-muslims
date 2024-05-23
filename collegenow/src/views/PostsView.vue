@@ -22,7 +22,6 @@
     />
   </div>
   <uploadPost />
-
   <!-- still need filters,swiping to next pet, button to next photo -->
 </template>
 

@@ -50,8 +50,12 @@ export default {
   },
   methods: {
     toggleDropdown() {
-      this.dropdownVisible = !this.dropdownVisible;
-      this.$emit("accountClick");
+      if (authStore.currentUser === null) {
+        router.push("login");
+      } else {
+        this.dropdownVisible = !this.dropdownVisible;
+        this.$emit("accountClick");
+      }
     },
     logOut: function () {
       authStore.clearUser();

@@ -8,11 +8,6 @@ export const useAuthStore = defineStore("auth", {
     };
   },
   actions: {
-    checkUser() {
-      if (useAuthStore().currentUser === null) {
-        router.push("login");
-      }
-    },
     loadUser(user) {
       this.currentUser = {
         user,
@@ -30,13 +25,14 @@ export const useAuthStore = defineStore("auth", {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            username: username.toLowerCase(),
+            username: username,
             password: userPassword,
           }),
         });
         const user = await res.json();
         if (res.ok) {
           this.loadUser(user);
+          router.push("posts");
           console.log(user);
         } else {
           throw new Error(user.error);

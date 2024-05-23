@@ -15,23 +15,17 @@
   </div>
   <div class="login">
     <h1>Login</h1>
-    <form>
+    <form name="loginForm" @submit.prevent="handleLogin">
       <div class="loginForm">
         <h2 class="text">Username</h2>
         <div class="username">
-          <input type="text" />
+          <input type="text" v-model="username" />
         </div>
         <h2 class="text">Password</h2>
         <div class="password">
-          <input type="password" />
+          <input type="password" v-model="userPassword" />
         </div>
-        <button
-          type="submit"
-          id="login"
-          @click="authStore.login(...loginCheck(a))"
-        >
-          Log In
-        </button>
+        <button type="submit" id="login">Log In</button>
       </div>
     </form>
     <div class="toSignUp">
@@ -40,19 +34,19 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { useAuthStore } from "@/stores/auth";
 import { ref } from "vue";
+import router from "../router/index";
 const authStore = useAuthStore();
 const username = ref("");
 const userPassword = ref("");
-function loginCheck(a) {
-  a.preventDefault();
-  if (username.value === "" || userPassword.value === "") {
-    alert("Please fill out all fields");
+
+function handleLogin() {
+  if (username.value !== "" && userPassword.value !== "") {
+    authStore.login(username.value, userPassword.value);
   } else {
-    router.push("posts");
-    return [userPassword.value, username.value];
+    alert("Please fill out all fields");
   }
 }
 </script>

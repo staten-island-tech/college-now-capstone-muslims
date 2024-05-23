@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-export const authStore = defineStore({
+export const postStore = defineStore("post", {
   id: "post",
   state: () => {
     return {};
@@ -12,8 +12,7 @@ export const authStore = defineStore({
       Description,
       animalType,
       phoneNumber,
-      postImage,
-
+      postImage
     ) {
       try {
         const res = await fetch("http://localhost:3000/createPost", {
