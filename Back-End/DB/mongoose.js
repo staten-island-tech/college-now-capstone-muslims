@@ -17,7 +17,7 @@ mongoose.connect(MONGO_URI, {
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.log(err));
 
-const Post = require('/posts');
+const Post = require('/Models/posts');
 
 mongoose.connection.on("error", (err) => {
   console.log(`${err.message}`);
