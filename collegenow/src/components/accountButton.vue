@@ -38,7 +38,7 @@
 import Divider from "primevue/divider";
 import Avatar from "primevue/avatar";
 import "primeicons/primeicons.css";
-import router from "../router";
+import router from "../router/index";
 import { useAuthStore } from "../stores/auth";
 const authStore = useAuthStore();
 export default {
