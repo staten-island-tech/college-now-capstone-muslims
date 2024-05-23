@@ -14,7 +14,9 @@
         <input type="email" id="email" v-model="userEmail" />
       </div>
       <h2 class="text">Please enter your birthday</h2>
-      <div class="age"><input type="date" v-model="birthdate" /></div>
+      <div class="age">
+        <input type="date" v-model="birthdate" max="2024-05-23" />
+      </div>
       <h2 class="text">Please select your state</h2>
       <div class="state">
         <Dropdown @change="stateChanged" />

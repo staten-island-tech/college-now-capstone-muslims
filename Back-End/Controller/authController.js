@@ -10,33 +10,33 @@ const generateToken = async function (user) {
 };
 
 exports.signup = async function (req, res) {
-  let username = req.body.username;
-  let email = req.body.userEmail;
-  const user = await userAuth.findOne({ username });
-  const userEmails = await userAuth.findOne({ email });
-  if (userEmails) {
-    alert("Email has already been used. Please use a new one. ");
-    return res.status(400).json({
-      success: false,
-      msg: "Email has already been used. Please use a new one.",
-    });
-  } else if (user) {
-    alert("Username has already been taken. Please choose a new one.");
-    return res.status(400).json({
-      success: false,
-      msg: "Username has already been taken. Please choose a new one.",
-    });
-  } else {
-    let newUser = new userAuth(req.body);
-    const token = await generateToken(newUser);
-    await newUser.save();
-    return res.json({
-      success: true,
-      msg: "Successfully created new user.",
-      newUser,
-      token,
-    });
-  }
+  // let username = req.body.username;
+  // let email = req.body.email;
+  // const user = await userAuth.findOne({ username });
+  // const userEmails = await userAuth.findOne({ email });
+  // if (userEmails) {
+  //   alert("Email has already been used. Please use a new one. ");
+  //   return res.status(400).json({
+  //     success: false,
+  //     msg: "Email has already been taken. Please choose another one.",
+  //   });
+  // } else if (user) {
+  //   alert("Username has already been taken. Please choose a new one.");
+  //   return res.status(400).json({
+  //     success: false,
+  //     msg: "Username is already taken. Please choose another one.",
+  //   });
+  // } else {
+  let newUser = new userAuth(req.body);
+  const token = await generateToken(newUser);
+  await newUser.save();
+  return res.json({
+    success: true,
+    msg: "Successfully created new user.",
+    newUser,
+    token,
+  });
+  // }
 };
 
 exports.login = async (req, res) => {

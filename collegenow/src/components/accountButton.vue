@@ -18,13 +18,13 @@
   <div class="dropdownMenu" v-if="dropdownVisible">
     <RouterLink to="/profile" class="profile"><p>My Profile</p></RouterLink>
     <Divider class="divider" />
-    <RouterLink @click="logOut" v-if="isLoggedIn">
+    <RouterLink @click="logOut" v-if="authStore.currentUser !== null">
       <p class="signOut">
         Log Out
         <i class="pi-sign-out"></i>
       </p>
     </RouterLink>
-    <RouterLink to="/login" v-else>
+    <RouterLink v else to="/login">
       <p class="signIn">
         Log In
         <i class="pi-sign-in"></i>
@@ -50,6 +50,7 @@ export default {
   },
   methods: {
     toggleDropdown() {
+      this.dropdownVisible = !this.dropdownVisible;
       if (authStore.currentUser === null) {
         router.push("login");
       } else {
@@ -67,17 +68,14 @@ export default {
       dropdownVisible: false,
     };
   },
-  mounted() {
-    this.currentUserImageURL = authStore.currentUser?.imageURL;
-  },
-  computed: {
-    isLoggedIn() {
-      return authStore.isAuthenticated;
-    },
-    currentUserImageURL() {
-      return authStore.currentUser?.imageURL;
-    },
-  },
+  // mounted() {
+  //   this.currentUserImageURL = authStore.currentUser?.imageURL;
+  // },
+  // computed: {
+  //   currentUserImageURL() {
+  //     return authStore.currentUser?.imageURL;
+  //   },
+  // },
 };
 </script>
 
