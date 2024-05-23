@@ -32,11 +32,6 @@ import accountButton from "../components/accountButton.vue";
 import { usePostStore } from "../stores/post";
 const postStore = usePostStore();
 export default {
-  setup() {
-    return {
-      postStore,
-    };
-  },
   components: {
     Post,
     uploadPost,

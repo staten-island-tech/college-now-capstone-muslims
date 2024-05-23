@@ -1,4 +1,4 @@
-const userPosts = require("../Models/posts")
+const userPosts = require("../Models/posts");
 const multer = require("multer");
 const multerOptions = {
   storage: multer.diskStorage({
@@ -23,44 +23,34 @@ const multerOptions = {
 };
 exports.upload = multer(multerOptions).single("photo");
 
-exports.homePage = (req, res) => {
-  const stores = ["Dunkin", "Tim Hortons", "Starbucks"];
+exports.createPost = async (req, res) => {
   try {
-    console.log(req.name); //we get req.name from the middleware but WE MUST call it in index
-    res.json([stores, req.name]); //if we want to send multiple "things" back to the user we need to use an array or object. Can't simply use , as that denotes status codes
+    const post = new userPosts(req.body);
+    shop.photo = req.file.path;
+    await post.save();
+    res.json([post]);
   } catch (error) {
-    console.log(error);
+    res.status(500).json(error);
   }
 };
 
-exports.createPost = async (req, res) => {
-    try {
-      const post = new userPosts(req.body);
-      shop.photo = req.file.path;
-      await post.save();
-      res.json([post]);
-    } catch (error) {
-      res.status(500).json(error);
+exports.getPost = async (req, res) => {
+  try {
+    const posts = await userPosts.find();
+    res.json(posts);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+exports.deletePost = async (req, res) => {
+  try {
+    const post = await userPosts.findByIdAndDelete(req.params.id);
+    if (!post) {
+      res.status(404).send();
     }
-  };
-  
-  exports.getPost = async (req, res) => {
-    try {
-      const posts = await userPosts.find();
-      res.json(posts);
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  };
-  
-  exports.deletePost = async (req, res) => {
-    try {
-      const post = await userPosts.findByIdAndDelete(req.params.id);
-      if (!post) {
-        res.status(404).send();
-      }
-      res.send(`${post} was removed`);
-    } catch (error) {
-      res.status(500).send(error);
-    }
-  };
+    res.send(`${post} was removed`);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
