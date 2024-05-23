@@ -31,7 +31,7 @@ export const profileStore = defineStore("profile", {
       updatedUsername,
       updatedPhoneNumber,
       updatedDescription,
-      updatedLocation
+      updatedState
     ) {
       try {
         const res = await fetch("http://localhost:3000/updateProfiles/:id", {
@@ -43,7 +43,7 @@ export const profileStore = defineStore("profile", {
             username: updatedUsername,
             phoneNumber: updatedPhoneNumber,
             description: updatedDescription,
-            location: updatedLocation,
+            state: updatedState,
           }),
         });
         const user = await res.json();

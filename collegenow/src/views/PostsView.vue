@@ -1,5 +1,4 @@
 <template>
-  <accountButton />
   <div class="logo">
     <RouterLink class="router" to="/"
       ><button>
@@ -9,6 +8,7 @@
         /></button
     ></RouterLink>
   </div>
+  <accountButton />
   <div class="Posts">
     <Post
       v-for="post in uploadedPhotos"

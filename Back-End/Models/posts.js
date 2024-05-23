@@ -29,7 +29,7 @@ const petSchema = new mongoose.Schema({
     trim: true,
     required: "",
   },
-  
+
   slug: String,
 });
 petSchema.pre("save", function (next) {

@@ -17,7 +17,7 @@
   <br />
   <div class="Posts">
     <RouterLink class="router" to="/posts" @click="checkUser"
-      ><button>Posts <img src="" alt="" /></button
+      ><button>Posts<img src="" alt="" /></button
     ></RouterLink>
   </div>
   <br />
@@ -32,6 +32,7 @@
 <script>
 import accountButton from "../components/accountButton.vue";
 import { useAuthStore } from "../stores/auth";
+import router from "../router/index";
 const authStore = useAuthStore();
 export default {
   setup() {
@@ -44,7 +45,9 @@ export default {
   },
   methods: {
     checkUser() {
-      authStore.checkUser();
+      if (authStore.currentUser === null) {
+        router.push("login");
+      }
     },
   },
 };
