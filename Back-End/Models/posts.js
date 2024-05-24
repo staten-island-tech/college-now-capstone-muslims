@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 const slugify = require("slugify");
 
-const postSchema = new mongoose.Schema({
+const postSchema = new Schema({
   petName: {
     type: String,
     trim: true,
@@ -38,7 +39,7 @@ const postSchema = new mongoose.Schema({
   slug: String,
 });
 
-postSchema.pre("save", function (next) {
+postSchema.pre("save", async function (next) {
   if (!this.isModified("petName")) {
     next();
     return;

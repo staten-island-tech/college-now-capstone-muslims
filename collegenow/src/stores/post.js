@@ -6,12 +6,11 @@ export const usePostStore = defineStore("post", {
     return {};
   },
   actions: {
-    loadPost(post) {
-      this.currentPost = post;
-    },
+
     deletePost() {
-      this.currentPost = null;
+
     },
+
     async createPost(
       petName,
       petAge,
@@ -59,7 +58,7 @@ export const usePostStore = defineStore("post", {
 
     async deletePosts(username, password) {
       try {
-        const res = await fetch("http://localhost:3000/deletePosts/:id", {
+        const res = await fetch("http://localhost:3000/deletePost/:id", {
           method: "DEL",
           headers: {
             "Content-Type": "application/json",

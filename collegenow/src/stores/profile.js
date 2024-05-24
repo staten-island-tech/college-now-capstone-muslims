@@ -11,7 +11,7 @@ export const profileStore = defineStore("profile", {
 
     async createProfile(initialTempEmail, initialTempUsername) {
       try {
-        const res = await fetch("http://localhost:3000/profile", {
+        const res = await fetch("http://localhost:3000/createProfile", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -34,7 +34,7 @@ export const profileStore = defineStore("profile", {
       updatedState
     ) {
       try {
-        const res = await fetch("http://localhost:3000/updateProfiles/:id", {
+        const res = await fetch("http://localhost:3000/updateProfile/:id", {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
