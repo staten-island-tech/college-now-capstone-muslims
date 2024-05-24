@@ -32,13 +32,12 @@
       placeholder="Write a description..."
       maxlength="500"
     ></textarea>
-    <button @click="visible = false">Cancel</button>
-    <button @click="submitPost">Post</button>
+    <button severity="secondary" @click="visible = false">Cancel</button>
+    <button @click="submitPost, (visible = false)">Post</button>
   </Dialog>
 </template>
 
 <script>
-import { usePostStore } from "@/stores/post";
 import Dialog from "primevue/dialog";
 import FileUpload from "primevue/fileupload";
 

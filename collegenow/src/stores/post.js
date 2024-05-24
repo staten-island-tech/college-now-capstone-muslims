@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
 
-export const usePostStore = defineStore("posts", {
-  state: () => ({
-    currentPost: null,
-    posts: [],
-  }),
+export const postStore = defineStore("post", {
+  id: "post",
+  state: () => {
+    return {};
+  },
   actions: {
     loadPost(post) {
       this.currentPost = post;
@@ -22,7 +22,7 @@ export const usePostStore = defineStore("posts", {
       postImage
     ) {
       try {
-        const res = await fetch("http://localhost:3000/posts", {
+        const res = await fetch("http://localhost:3000/createPost", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export const usePostStore = defineStore("posts", {
         console.log(error);
       }
     },
-    async fetchPosts() {
+    async getPosts() {
       try {
         const res = await fetch("http://localhost:3000/posts");
         this.posts = await res.json();
