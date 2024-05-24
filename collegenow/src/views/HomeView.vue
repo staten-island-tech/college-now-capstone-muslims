@@ -4,7 +4,7 @@
     ><button>
       <img
         class="logo"
-        src="https://cdn.discordapp.com/attachments/1025570390656962642/1242347460450586716/PINDER.jpg?ex=664d81bc&is=664c303c&hm=d8e1c1546588c4ab3baa530a0a8f32753d2ca174b102fc6b18a7f7be34418658&"
+        src="https://i.im.ge/2024/05/24/KdEbs9.image.png"
         alt="Logo with a monkey wearing sunglasses"
       /></button
   ></RouterLink>
