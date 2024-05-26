@@ -15,9 +15,6 @@ export const usePostStore = defineStore("post", {
       try {
         const res = await fetch("http://localhost:3000/createPost", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
           body: formData,
         });
         const post = await res.json();
