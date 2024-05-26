@@ -15,7 +15,7 @@
       </div>
       <h2 class="text">Please enter your birthday</h2>
       <div class="age">
-        <input type="date" v-model="birthdate" max="2024-05-23" />
+        <input type="date" v-model="birthdate" min="1907-03-04" :max="today" />
       </div>
       <h2 class="text">Please select your state</h2>
       <div class="state">
@@ -64,6 +64,7 @@ const userPassword = ref("");
 const birthdate = ref("");
 const confpassword = ref("");
 const state = ref("");
+const today = new Date();
 
 function calculateAge() {
   const today = new Date();

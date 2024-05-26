@@ -1,20 +1,21 @@
 <template>
   <Avatar
-    v-if="$route.path !== '/'"
-    :src="currentUserImageURL"
-    alt="User Uploaded Profile Picture"
     size="small"
     shape="circle"
     @click="toggleDropdown"
+    class="pi pi-user"
   />
-  <Avatar
+  <!-- <Avatar
     v-else
     alt="Default Profile Picture"
     @click="toggleDropdown"
     class="pi pi-user"
     size="small"
     shape="circle"
-  />
+        v-if="$route.path !== '/'"
+    :src="currentUserImageURL"
+    alt="User Uploaded Profile Picture"
+  /> -->
   <div class="dropdownMenu" v-if="dropdownVisible">
     <RouterLink to="/profile" class="profile"><p>My Profile</p></RouterLink>
     <Divider class="divider" />
@@ -51,12 +52,7 @@ export default {
   methods: {
     toggleDropdown() {
       this.dropdownVisible = !this.dropdownVisible;
-      if (authStore.currentUser === null) {
-        router.push("login");
-      } else {
-        this.dropdownVisible = !this.dropdownVisible;
-        this.$emit("accountClick");
-      }
+      this.$emit("accountClick");
     },
     logOut: function () {
       authStore.clearUser();

@@ -34,11 +34,15 @@ export const useAuthStore = defineStore("auth", {
           this.loadUser(user);
           router.push("posts");
           console.log(user);
+        } else if (user.error === "User not found") {
+          alert("User not found");
+        } else if (user.error === "Password is incorrect") {
+          alert("Password is incorrect");
         } else {
-          throw new Error(user.error);
+          alert("An unexpected error occurred. Please try again.");
         }
       } catch (error) {
-        console.log(error);
+        alert("An unexpected error occurred. Please try again.");
       }
     },
     async register(
@@ -67,12 +71,21 @@ export const useAuthStore = defineStore("auth", {
         const user = await res.json();
         if (res.ok) {
           this.loadUser(user);
+        } else if (
+          user.error ===
+          "Email has already been taken. Please choose another one."
+        ) {
+          alert("Email has already been taken. Please choose another one.");
+        } else if (
+          user.error ===
+          "Username has already been taken. Please choose a new one."
+        ) {
+          alert("Username has already been taken. Please choose a new one.");
         } else {
-          throw new Error(user.error);
+          alert("An unexpected error occurred. Please try again.");
         }
-        console.log(user);
       } catch (error) {
-        console.log(error);
+        alert(".");
       }
     },
   },
