@@ -15,15 +15,12 @@ exports.signup = async function (req, res) {
   const user = await userAuth.findOne({ username });
   const userEmail = await userAuth.findOne({ email });
   if (userEmail) {
-    return res.status(400).json({
-      success: false,
-      msg: "Email has already been taken. Please choose another one.",
+    return res.status(409).json({
+      error: "Email has already been taken. Please choose another one.",
     });
   } else if (user) {
-    alert("Username has already been taken. Please choose a new one.");
-    return res.status(400).json({
-      success: false,
-      msg: "Username is already taken. Please choose another one.",
+    return res.status(409).json({
+      error: "Username has already been taken. Please choose another one.",
     });
   } else {
     let newUser = new userAuth(req.body);
@@ -48,7 +45,7 @@ exports.login = async (req, res) => {
     }
     const pwMatch = await bcrypt.compare(password, user.password);
     if (!pwMatch) {
-      res.status(401).json({ error: "Password is incorrect" });
+      return res.status(401).json({ error: "Password is incorrect" });
     }
     const token = await generateToken(user);
     return res.send({
@@ -57,10 +54,6 @@ exports.login = async (req, res) => {
       user: { username: user.username },
     });
   } catch (error) {
-    if (res.headersSent) {
-      console.error("Error:", error);
-      return;
-    }
     return res
       .status(500)
       .json({ error: "An unexpected error occurred. Please try again." });

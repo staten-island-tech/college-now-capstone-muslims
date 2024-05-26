@@ -71,6 +71,7 @@ export const useAuthStore = defineStore("auth", {
         const user = await res.json();
         if (res.ok) {
           this.loadUser(user);
+          router.push("login");
         } else if (
           user.error ===
           "Email has already been taken. Please choose another one."
@@ -78,14 +79,14 @@ export const useAuthStore = defineStore("auth", {
           alert("Email has already been taken. Please choose another one.");
         } else if (
           user.error ===
-          "Username has already been taken. Please choose a new one."
+          "Username has already been taken. Please choose another one."
         ) {
-          alert("Username has already been taken. Please choose a new one.");
+          alert("Username has already been taken. Please choose another one.");
         } else {
           alert("An unexpected error occurred. Please try again.");
         }
       } catch (error) {
-        alert(".");
+        alert("An unexpected error occurred. Please try again.");
       }
     },
   },
