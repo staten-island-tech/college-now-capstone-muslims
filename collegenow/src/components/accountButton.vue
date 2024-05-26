@@ -19,19 +19,18 @@
   <div class="dropdownMenu" v-if="dropdownVisible">
     <RouterLink to="/profile" class="profile"><p>My Profile</p></RouterLink>
     <Divider class="divider" />
-    <RouterLink @click="logOut" v-if="authStore.currentUser !== null">
+    <RouterLink @click="logOut" v-if="isLoggedIn">
       <p class="signOut">
         Log Out
         <i class="pi-sign-out"></i>
       </p>
     </RouterLink>
-    <RouterLink v else to="/login">
+    <RouterLink v-else :to="{ name: 'login' }">
       <p class="signIn">
         Log In
         <i class="pi-sign-in"></i>
       </p>
-      ></RouterLink
-    >
+    </RouterLink>
   </div>
 </template>
 
@@ -44,6 +43,15 @@ import { useAuthStore } from "../stores/auth";
 const authStore = useAuthStore();
 export default {
   name: "accountButton",
+  setup() {
+    try {
+      return {
+        authStore,
+      };
+    } catch (error) {
+      alert("An unexpected error occurred. Please try again.");
+    }
+  },
   emits: ["accountClick"],
   components: {
     Avatar,
@@ -59,19 +67,16 @@ export default {
       router.push("/");
     },
   },
+  computed: {
+    isLoggedIn() {
+      return !!authStore.currentUser;
+    },
+  },
   data() {
     return {
       dropdownVisible: false,
     };
   },
-  // mounted() {
-  //   this.currentUserImageURL = authStore.currentUser?.imageURL;
-  // },
-  // computed: {
-  //   currentUserImageURL() {
-  //     return authStore.currentUser?.imageURL;
-  //   },
-  // },
 };
 </script>
 

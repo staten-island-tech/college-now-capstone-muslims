@@ -34,6 +34,7 @@ import accountButton from "../components/accountButton.vue";
 import { useAuthStore } from "../stores/auth";
 import router from "../router/index";
 const authStore = useAuthStore();
+
 export default {
   setup() {
     return {

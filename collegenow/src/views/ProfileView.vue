@@ -1,5 +1,5 @@
 <template>
-  <accountButton />
+  <accountButton @accountClick="" />
   <div class="logo">
     <RouterLink class="router" to="/"
       ><button>

@@ -8,7 +8,7 @@
         /></button
     ></RouterLink>
   </div>
-  <accountButton />
+  <accountButton @accountClick="onAccountButtonClick" />
   <div class="Posts">
     <Post
       v-for="post in uploadedPhotos"
@@ -53,6 +53,9 @@ export default {
     addPost(postData) {
       // Add the new post to the posts array
       this.posts.push(postData);
+    },
+    onAccountButtonClick() {
+      console.log("Account button clicked in PostsView");
     },
   },
 };
