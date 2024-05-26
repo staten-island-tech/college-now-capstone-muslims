@@ -16,9 +16,9 @@
     </select>
     <div class="postImage">
       <FileUpload
-        name="fileUpload[]"
+        name="postImage"
         url=""
-        @upload=""
+        @upload="handleFileUpload"
         :multiple="true"
         accept="image/*"
       />
@@ -40,7 +40,7 @@
 <script>
 import Dialog from "primevue/dialog";
 import FileUpload from "primevue/fileupload";
-
+import { usePostStore } from '../stores/post';
 export default {
   name: "uploadPost",
   components: {
@@ -55,7 +55,7 @@ export default {
       phoneNumber: "",
       description: "",
       selectedAnimal: "",
-      postImage: "",
+      postImage: null,
       animalType: ["Dog", "Cat", "Monkey"], // Add more animal types as needed
       visible: false,
     };
@@ -69,18 +69,26 @@ export default {
         ? x[1]
         : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
     },
+    handleFileUpload(event) {
+      console.log("File selected: ", event.target.files[0]);
+      this.postImage = event.target.files[0]; // Capture the file
+    },
     async submitPost() {
       const postStore = usePostStore();
-      await postStore.createPost(
-        this.petName,
-        this.petAge,
-        this.ownerName,
-        this.phoneNumber,
-        this.description,
-        this.selectedAnimal,
-        this.postImage
-      );
+      const formData = new FormData();
+      formData.append("petName", this.petName);
+      formData.append("petAge", this.petAge);                                           
+      formData.append("ownerName", this.ownerName);
+      formData.append("phoneNumber", this.phoneNumber);
+      formData.append("description", this.description);
+      formData.append("animalType", this.selectedAnimal);
+      formData.append("postImage", this.postImage); // Append file
+
+      console.log("Form Data: ", formData);
+
+      await postStore.createPost(formData);
       this.visible = false;
+
       // Clear input fields after submission
       this.petName = "";
       this.petAge = "";
@@ -88,7 +96,7 @@ export default {
       this.phoneNumber = "";
       this.description = "";
       this.selectedAnimal = "";
-      this.postImage = "";
+      this.postImage = null;
     }
   }
 };

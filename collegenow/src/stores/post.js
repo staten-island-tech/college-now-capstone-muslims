@@ -11,40 +11,26 @@ export const usePostStore = defineStore("post", {
 
     },
 
-    async createPost(
-      petName,
-      petAge,
-      ownerName,
-      phoneNumber,
-      description,
-      animalType,
-      postImage
-    ) {
+    async createPost(formData) {
       try {
         const res = await fetch("http://localhost:3000/createPost", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            petName,
-            petAge,
-            ownerName,
-            phoneNumber,
-            description,
-            animalType,
-            postImage,
-          }),
+          body: formData,
         });
         const post = await res.json();
         if (res.ok) {
+          console.log("Post created: ", post);
           this.loadPost(post);
           console.log(post);
         } else {
+          console.error("Error in response: ", post.error);
           throw new Error(post.error);
         }
       } catch (error) {
-        console.log(error);
+        console.error("Error creating post: ", error);
       }
     },
     async getPosts() {
