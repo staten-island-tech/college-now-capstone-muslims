@@ -25,11 +25,19 @@ exports.upload = multer(multerOptions).single("photo");
 
 exports.createPost = async (req, res) => {
   try {
-    const post = new userPosts(req.body);
-    shop.photo = req.file.path;
+    console.log("Request Body: ", req.body);  // Log request body
+    console.log("Uploaded File: ", req.file); // Log file upload
+
+    const post = new userPosts({
+      ...req.body,
+      postImage: req.file.path
+    });
+
     await post.save();
-    res.json([post]);
+    console.log("Post saved: ", post); // Log the saved post
+    res.json(post);
   } catch (error) {
+    console.error("Error creating post: ", error); // Log any errors
     res.status(500).json(error);
   }
 };
