@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
-export const usePostStore = defineStore("post", {
-  id: "post",
+export const usePostStore = defineStore("posts", {
+  id: "posts",
   actions: {
     async createPost(
       petName,

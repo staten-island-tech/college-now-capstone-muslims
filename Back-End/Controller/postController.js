@@ -28,11 +28,7 @@ exports.createPost = async (req, res) => {
     console.log("Request Body: ", req.body);  // Log request body
     console.log("Uploaded File: ", req.file); // Log file upload
 
-    const post = new userPosts({
-      ...req.body,
-      postImage: req.file.path
-    });
-
+    const post = new userPosts(req.body);
     await post.save();
     console.log("Post saved: ", post); // Log the saved post
     res.json(post);

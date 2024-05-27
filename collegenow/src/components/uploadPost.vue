@@ -77,16 +77,7 @@ export default {
       console.log("File selected: ", event.target.files[0]);
       this.postImage = event.target.files[0]; // Capture the file
     },
-    async submitPost() {
-      await postStore.createPost(
-        this.petName,
-        this.petAge,
-        this.ownerName,
-        this.phoneNumber,
-        this.description,
-        this.selectedAnimal,
-        this.postImage
-      );
+    submitPost() {
       this.visible = false;
       this.petName = "";
       this.petAge = "";
