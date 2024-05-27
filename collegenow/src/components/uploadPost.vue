@@ -75,20 +75,16 @@ export default {
     },
     async submitPost() {
       const postStore = usePostStore();
-      const formData = new FormData();
-      formData.append("petName", this.petName);
-      formData.append("petAge", this.petAge);                                           
-      formData.append("ownerName", this.ownerName);
-      formData.append("phoneNumber", this.phoneNumber);
-      formData.append("description", this.description);
-      formData.append("animalType", this.selectedAnimal);
-      formData.append("postImage", this.postImage); // Append file
-
-      console.log("Form Data: ", formData);
-
-      await postStore.createPost(formData);
+      await postStore.createPost(
+        this.petName,
+        this.petAge,
+        this.ownerName,
+        this.phoneNumber,
+        this.description,
+        this.selectedAnimal,
+        this.postImage
+      );
       this.visible = false;
-
       // Clear input fields after submission
       this.petName = "";
       this.petAge = "";
@@ -96,7 +92,7 @@ export default {
       this.phoneNumber = "";
       this.description = "";
       this.selectedAnimal = "";
-      this.postImage = null;
+      this.postImage = "";
     }
   }
 };

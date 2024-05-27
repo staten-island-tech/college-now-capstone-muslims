@@ -6,16 +6,30 @@ export const usePostStore = defineStore("post", {
     return {};
   },
   actions: {
-
-    deletePost() {
-
-    },
-
-    async createPost(formData) {
+    async createPost(
+      petName,
+      petAge,
+      ownerName,
+      phoneNumber,
+      description,
+      animalType,
+      postImage
+    ) {
       try {
         const res = await fetch("http://localhost:3000/createPost", {
           method: "POST",
-          body: formData,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            petName,
+            petAge,
+            ownerName,
+            phoneNumber,
+            description,
+            animalType,
+            postImage,
+          }),
         });
         const post = await res.json();
         if (res.ok) {
