@@ -6,7 +6,7 @@
       <input v-model="petName" type="text" id="petName" />
     </div>
     <div class="petAge">
-      <label for="petAge">Pet Age:</label>
+      <label for="petAge">Pet Age (Human years):</label>
       <input v-model="petAge" type="text" id="petAge" />
     </div>
     <label for="animalType">Select an animal type:</label>
@@ -40,9 +40,13 @@
 <script>
 import Dialog from "primevue/dialog";
 import FileUpload from "primevue/fileupload";
-import { usePostStore } from '../stores/post';
+import { usePostStore } from "@/stores/post";
+const postStore = usePostStore();
 export default {
   name: "uploadPost",
+  setup() {
+    return { postStore };
+  },
   components: {
     Dialog,
     FileUpload,
@@ -74,7 +78,6 @@ export default {
       this.postImage = event.target.files[0]; // Capture the file
     },
     async submitPost() {
-      const postStore = usePostStore();
       await postStore.createPost(
         this.petName,
         this.petAge,
@@ -85,7 +88,6 @@ export default {
         this.postImage
       );
       this.visible = false;
-      // Clear input fields after submission
       this.petName = "";
       this.petAge = "";
       this.ownerName = "";
@@ -93,8 +95,8 @@ export default {
       this.description = "";
       this.selectedAnimal = "";
       this.postImage = "";
-    }
-  }
+    },
+  },
 };
 </script>
 

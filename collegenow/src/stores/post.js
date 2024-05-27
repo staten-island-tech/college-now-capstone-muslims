@@ -2,9 +2,6 @@ import { defineStore } from "pinia";
 
 export const usePostStore = defineStore("post", {
   id: "post",
-  state: () => {
-    return {};
-  },
   actions: {
     async createPost(
       petName,
@@ -22,19 +19,19 @@ export const usePostStore = defineStore("post", {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            petName,
-            petAge,
-            ownerName,
-            phoneNumber,
-            description,
-            animalType,
-            postImage,
+            petName: petName,
+            petAge: petAge,
+            ownerName: ownerName,
+            phoneNumber: phoneNumber,
+            description: description,
+            animalType: animalType,
+            postImage: postImage,
           }),
         });
         const post = await res.json();
         if (res.ok) {
           console.log("Post created: ", post);
-          this.loadPost(post);
+          alert("Post successfully uploaded");
           console.log(post);
         } else {
           console.error("Error in response: ", post.error);

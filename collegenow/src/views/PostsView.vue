@@ -29,8 +29,6 @@
 import Post from "../components/Post.vue";
 import uploadPost from "../components/uploadPost.vue";
 import accountButton from "../components/accountButton.vue";
-import { usePostStore } from "../stores/post";
-const postStore = usePostStore();
 export default {
   components: {
     Post,
