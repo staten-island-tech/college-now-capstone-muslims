@@ -58,6 +58,11 @@
     </div>
     State: <Dropdown @change="stateChanged" :disabled="!editMode" />
   </div>
+  <div class="Posts">
+    <RouterLink class="router" to="/posts"
+      ><button>Posts<img src="" alt="" /></button
+    ></RouterLink>
+  </div>
 </template>
 
 <script>

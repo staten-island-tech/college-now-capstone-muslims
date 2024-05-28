@@ -19,16 +19,10 @@
   <div class="dropdownMenu" v-if="dropdownVisible">
     <RouterLink to="/profile" class="profile"><p>My Profile</p></RouterLink>
     <Divider class="divider" />
-    <RouterLink @click="logOut" v-if="isLoggedIn">
+    <RouterLink @click="logOut" :to="'/'">
       <p class="signOut">
         Log Out
         <i class="pi-sign-out"></i>
-      </p>
-    </RouterLink>
-    <RouterLink v-else :to="{ name: 'login' }">
-      <p class="signIn">
-        Log In
-        <i class="pi-sign-in"></i>
       </p>
     </RouterLink>
   </div>
@@ -41,16 +35,13 @@ import "primeicons/primeicons.css";
 import router from "../router/index";
 import { useAuthStore } from "../stores/auth";
 const authStore = useAuthStore();
+
 export default {
   name: "accountButton",
   setup() {
-    try {
-      return {
-        authStore,
-      };
-    } catch (error) {
-      alert("An unexpected error occurred. Please try again.");
-    }
+    return {
+      authStore,
+    };
   },
   emits: ["accountClick"],
   components: {
@@ -62,14 +53,9 @@ export default {
       this.dropdownVisible = !this.dropdownVisible;
       this.$emit("accountClick");
     },
-    logOut: function () {
+    logOut() {
       authStore.clearUser();
       router.push("/");
-    },
-  },
-  computed: {
-    isLoggedIn() {
-      return !!authStore.currentUser;
     },
   },
   data() {
