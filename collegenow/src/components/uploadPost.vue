@@ -34,6 +34,7 @@
     ></textarea>
     <button severity="secondary" @click="visible = false">Cancel</button>
     <button @click="submitPost, (visible = false)">Post</button>
+    <button @click="createPost">Test</button>
   </Dialog>
 </template>
 
@@ -86,6 +87,44 @@ export default {
       this.description = "";
       this.selectedAnimal = "";
       this.postImage = "";
+    },
+    async createPost(
+      petName,
+      petAge,
+      ownerName,
+      phoneNumber,
+      description,
+      animalType,
+      postImage
+    ) {
+      try {
+        const res = await fetch("http://localhost:3000/createPost", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            petName: petName,
+            petAge: petAge,
+            ownerName: ownerName,
+            phoneNumber: phoneNumber,
+            description: description,
+            animalType: animalType,
+            postImage: postImage,
+          }),
+        });
+        const post = await res.json();
+        if (res.ok) {
+          console.log("Post created: ", post);
+          alert("Post successfully uploaded");
+          console.log(post);
+        } else {
+          console.error("Error in response: ", post.error);
+          throw new Error(post.error);
+        }
+      } catch (error) {
+        console.error("Error creating post: ", error);
+      }
     },
   },
 };
