@@ -7,12 +7,11 @@ const authController = require("../Controller/authController");
 router.post("/createProfile", profileController.createProfile);
 router.patch("/updateProfile/:id", profileController.updateProfile);
 
-router.post("/createPost", postController.createPost);
+router.post("/createPost", postController.authCheck, postController.createPost);
 router.get("/posts", postController.getPost);
 router.delete("/deletePost/:id", postController.deletePost);
 
 router.post("/signup", authController.signup);
 router.post("/login", authController.login);
-router.get("/protected", authController.authCheck, authController.protected);
 
 module.exports = router;

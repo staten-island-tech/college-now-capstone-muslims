@@ -21,11 +21,11 @@ const multerOptions = {
         false;
   },
 };
-exports.upload = multer(multerOptions).single("photo");
+exports.upload = multer(multerOptions).single("photo"); //make it multiple photos (function is never called in routes)
 
 exports.createPost = async (req, res) => {
   try {
-    console.log("Request Body: ", req.body);  // Log request body
+    console.log("Request Body: ", req.body); // Log request body
     console.log("Uploaded File: ", req.file); // Log file upload
 
     const post = new userPosts(req.body);
@@ -56,5 +56,22 @@ exports.deletePost = async (req, res) => {
     res.send(`${post} was removed`);
   } catch (error) {
     res.status(500).send(error);
+  }
+};
+exports.authCheck = async (req, res, next) => {
+  try {
+    const token = req.header("Authorization").replace("Bearer ", "");
+    const decoded = jwt.verify(token, `${process.env.SECRET}`);
+    const user = await userAuth.findOne({
+      _id: decoded._id,
+    });
+    if (!user) {
+      throw new Error("User not found.");
+    }
+    req.token = token;
+    req.user = user;
+    next();
+  } catch (e) {
+    res.status(401).send({ error: "Please authenticate" });
   }
 };
