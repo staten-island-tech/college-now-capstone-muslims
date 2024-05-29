@@ -33,7 +33,7 @@
       maxlength="500"
     ></textarea>
     <button severity="secondary" @click="visible = false">Cancel</button>
-    <button @click="definePost(submitPost())">Post</button>
+    <button @click="definePost()">Post</button>
   </Dialog>
 </template>
 
@@ -87,15 +87,7 @@ export default {
       this.selectedAnimal = "";
       this.postImage = "";
     },
-    async definePost(
-      petName,
-      petAge,
-      ownerName,
-      phoneNumber,
-      description,
-      animalType,
-      postImage
-    ) {
+    async definePost() {
       try {
         const res = await fetch("http://localhost:3000/createPost", {
           method: "POST",
@@ -103,13 +95,13 @@ export default {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            petName: petName,
-            petAge: petAge,
-            ownerName: ownerName,
-            phoneNumber: phoneNumber,
-            description: description,
-            animalType: animalType,
-            postImage: postImage,
+            petName: this.petName,
+            petAge: this.petAge,
+            ownerName: "sdadsdasas",
+            phoneNumber: this.phoneNumber,
+            description: this.description,
+            animalType: this.selectedAnimal,
+            postImage: "dsadas",
           }),
         });
         const post = await res.json();
@@ -124,6 +116,7 @@ export default {
       } catch (error) {
         console.error("Error creating post: ", error);
       }
+      submitPost()
     },
   },
 };
