@@ -111,7 +111,7 @@ function signup(age) {
       state.value,
     ];
   }
-}
+};
 </script>
 
 <style>
