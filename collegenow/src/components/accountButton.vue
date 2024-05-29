@@ -22,7 +22,7 @@
     <RouterLink @click="logOut" :to="'/'">
       <p class="signOut">
         Log Out
-        <i class="pi-sign-out"></i>
+        <i class="pi pi-sign-out"></i>
       </p>
     </RouterLink>
   </div>
