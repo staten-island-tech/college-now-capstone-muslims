@@ -34,6 +34,10 @@ import accountButton from "../components/accountButton.vue";
 import { useAuthStore } from "../stores/auth";
 import router from "../router/index";
 const authStore = useAuthStore();
+import { onMounted } from "vue";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 export default {
   setup() {
