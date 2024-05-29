@@ -59,30 +59,3 @@ exports.login = async (req, res) => {
       .json({ error: "An unexpected error occurred. Please try again." });
   }
 };
-
-exports.authCheck = async (req, res, next) => {
-  try {
-    const token = req.header("Authorization").replace("Bearer ", "");
-    const decoded = jwt.verify(token, `${process.env.SECRET}`);
-    const user = await userAuth.findOne({
-      _id: decoded._id,
-    });
-    if (!user) {
-      throw new Error("User not found.");
-    }
-    req.token = token;
-    req.user = user;
-    next();
-  } catch (e) {
-    res.status(401).send({ error: "Please authenticate" });
-  }
-};
-
-exports.protected = async (req, res) => {
-  let user = req.user;
-  try {
-    res.json({ user });
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
