@@ -33,8 +33,7 @@
       maxlength="500"
     ></textarea>
     <button severity="secondary" @click="visible = false">Cancel</button>
-    <button @click="submitPost, (visible = false)">Post</button>
-    <button @click="createPost">Test</button>
+    <button @click="definePost(submitPost())">Post</button>
   </Dialog>
 </template>
 
@@ -42,10 +41,10 @@
 import Dialog from "primevue/dialog";
 import FileUpload from "primevue/fileupload";
 import { usePostStore } from "@/stores/post";
-const postStore = usePostStore();
 export default {
   name: "uploadPost",
   setup() {
+    const postStore = usePostStore();
     return { postStore };
   },
   components: {
@@ -88,7 +87,7 @@ export default {
       this.selectedAnimal = "";
       this.postImage = "";
     },
-    async createPost(
+    async definePost(
       petName,
       petAge,
       ownerName,
