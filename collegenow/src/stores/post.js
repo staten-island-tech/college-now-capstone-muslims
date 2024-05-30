@@ -3,15 +3,6 @@ import { defineStore } from "pinia";
 export const usePostStore = defineStore("posts", {
   id: "posts",
   actions: {
-    async getPosts() {
-      try {
-        const res = await fetch("http://localhost:3000/posts");
-        this.posts = await res.json();
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
     async deletePosts(username, password) {
       try {
         const res = await fetch("http://localhost:3000/deletePost/:id", {

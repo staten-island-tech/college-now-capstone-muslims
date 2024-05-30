@@ -1,9 +1,4 @@
 <template>
-  <img
-    class="backgroundImage"
-    src="https://img.freepik.com/premium-photo/group-monkeys-standing-each-other-street-with-man-background-generative-ai_97167-5808.jpg"
-    alt="Background image featuring a bunch of monkeys"
-  />
   <div class="logo">
     <RouterLink class="router" to="/"
       ><button>
@@ -32,6 +27,11 @@
       Don't have an account?<RouterLink to="/signup">Sign Up Here</RouterLink>
     </div>
   </div>
+  <img
+    class="backgroundImage"
+    src="https://img.freepik.com/premium-photo/group-monkeys-standing-each-other-street-with-man-background-generative-ai_97167-5808.jpg"
+    alt="Background image featuring a bunch of monkeys"
+  />
 </template>
 
 <script setup>
@@ -48,7 +48,8 @@ function handleLogin() {
   } else {
     alert("Please fill out all fields");
   }
-}
+};
+
 </script>
 
 <style>
