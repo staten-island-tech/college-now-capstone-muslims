@@ -9,49 +9,61 @@
     ></RouterLink>
   </div>
   <accountButton />
-  <div class="Posts">
-    <Post
-      v-for="post in uploadedPhotos"
-      :image="post.imageUrl"
-      :key="post.id"
-      :Name="post.name"
-      :description="post.description"
-      :ownerName="post.ownerName"
-      :number="post.number"
-      :email="post.email"
-    />
-  </div>
   <uploadPost />
+  <div>
+    <h1>Posts</h1>
+    <ul>
+      <li v-for="post in posts" :key="post._id">{{ post.petName }}</li>
+    </ul>
+  </div>
   <!-- still need filters,swiping to next pet, button to next photo -->
 </template>
 
-<script>
+<script >
+import { ref, onMounted } from 'vue';
 import Post from "../components/Post.vue";
 import uploadPost from "../components/uploadPost.vue";
 import accountButton from "../components/accountButton.vue";
+import { useAuthStore } from "@/stores/auth";
+
 export default {
   components: {
     Post,
     uploadPost,
     accountButton,
   },
-  data() {
-    return {
-      uploadedPhotos: [
-        // Add more photos as they are uploaded from back end
-      ],
-      visible: false,
-    };
-  },
+  setup() {
+    const uploadedPhotos = ref([]);
+    const posts = ref([]);
+    const authStore = useAuthStore();
 
-  methods: {
-    toggleVisibility() {
-      this.visible = !this.visible;
-    },
-    addPost(postData) {
-      // Add the new post to the posts array
-      this.posts.push(postData);
-    },
+    async function getPosts() {
+      const authStore = useAuthStore();
+      let postUsername = authStore.username
+      try {
+        const response = await fetch(`http://localhost:3000/posts/${postUsername}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+        posts.value = data;
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+
+    onMounted(() => {
+      getPosts();
+    });
+
+    return {
+      uploadedPhotos,
+      posts,
+      getPosts,
+      authStore,
+    };
   },
 };
 </script>

@@ -15,13 +15,7 @@
       <option v-for="animal in animalType" :key="animal">{{ animal }}</option>
     </select>
     <div class="postImage">
-      <FileUpload
-        name="postImage"
-        url=""
-        @upload="handleFileUpload"
-        :multiple="true"
-        accept="image/*"
-      />
+      <input type="file" @change="handleFileUpload" />
     </div>
     <div class="phoneNumber">
       <label for="phoneNumber">Phone Number:</label>
@@ -39,7 +33,6 @@
 
 <script>
 import Dialog from "primevue/dialog";
-import FileUpload from "primevue/fileupload";
 import { usePostStore } from "@/stores/post";
 export default {
   name: "uploadPost",
@@ -49,7 +42,6 @@ export default {
   },
   components: {
     Dialog,
-    FileUpload,
   },
   data() {
     return {
@@ -77,32 +69,20 @@ export default {
       console.log("File selected: ", event.target.files[0]);
       this.postImage = event.target.files[0]; // Capture the file
     },
-    submitPost() {
-      this.visible = false;
-      this.petName = "";
-      this.petAge = "";
-      this.ownerName = "";
-      this.phoneNumber = "";
-      this.description = "";
-      this.selectedAnimal = "";
-      this.postImage = "";
-    },
     async definePost() {
+      const formData = new FormData();
+      formData.append("petName", this.petName);
+      formData.append("petAge", this.petAge);
+      formData.append("ownerName", "sdadsdasas");
+      formData.append("phoneNumber", this.phoneNumber);
+      formData.append("description", this.description);
+      formData.append("animalType", this.selectedAnimal);
+      formData.append("photo", this.postImage);
+
       try {
         const res = await fetch("http://localhost:3000/createPost", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            petName: this.petName,
-            petAge: this.petAge,
-            ownerName: "sdadsdasas",
-            phoneNumber: this.phoneNumber,
-            description: this.description,
-            animalType: this.selectedAnimal,
-            postImage: "dsadas",
-          }),
+          body: formData,
         });
         const post = await res.json();
         if (res.ok) {
@@ -116,7 +96,17 @@ export default {
       } catch (error) {
         console.error("Error creating post: ", error);
       }
-      submitPost()
+      this.submitPost()
+    },
+    submitPost() {
+      this.visible = false;
+      this.petName = "";
+      this.petAge = "";
+      this.ownerName = "";
+      this.phoneNumber = "";
+      this.description = "";
+      this.selectedAnimal = "";
+      this.postImage = "";
     },
   },
 };

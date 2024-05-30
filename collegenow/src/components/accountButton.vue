@@ -17,7 +17,7 @@
     alt="User Uploaded Profile Picture"
   /> -->
   <div class="dropdownMenu" v-if="dropdownVisible">
-    <RouterLink to="/profile" class="profile"><p>My Profile</p></RouterLink>
+    <RouterLink to="/profile" class="profile" @click="checkUser"><p>My Profile</p></RouterLink>
     <Divider class="divider" />
     <RouterLink @click="logOut" :to="'/'">
       <p class="signOut">
