@@ -1,32 +1,33 @@
 <template>
-  <accountButton @accountClick="checkUser" />
-  <RouterLink class="router" to="/"
-    ><button>
-      <img
-        class="logo"
-        src="https://i.im.ge/2024/05/24/KdEbs9.image.png"
-        alt="Logo with a monkey wearing sunglasses"
-      /></button
-  ></RouterLink>
-  <br />
-  <img
-    class="backgroundImage"
-    src="https://img.freepik.com/premium-photo/group-monkeys-standing-each-other-street-with-man-background-generative-ai_97167-5808.jpg"
-    alt="Background image featuring a bunch of monkeys"
-  />
-  <br />
-  <div class="Posts">
-    <RouterLink class="router" to="/posts" @click="checkUser"
-      ><button>Posts<img src="" alt="" /></button
-    ></RouterLink>
+  <div class="header">
+    <div class="nav-links">
+      <RouterLink class="logo-router" to="/"
+        ><button>
+          <img
+            class="logo"
+            src="https://i.im.ge/2024/05/24/KdEbs9.image.png"
+            alt="Logo with a monkey wearing sunglasses"
+          /></button
+      ></RouterLink>
+      <RouterLink class="login-router" to="/login" v-if="authStore.currentUser === null">
+        <button class="login">Login</button>
+      </RouterLink>
+      <RouterLink class="signup-router" to="/signup" v-if="authStore.currentUser === null">
+        <button class="signUp">Sign Up</button>
+      </RouterLink>
+    <div class="actions">
+      <RouterLink class="posts-router" to="/posts" @click="checkUser">
+        <button class="posts">Posts</button>
+      </RouterLink>
+      <accountButton class="account-button", @accountClick="checkUser" />
+    </div>
+    </div>
   </div>
-  <br />
-  <RouterLink class="router" to="/login" v-if="authStore.currentUser === null">
-    <button class="login">Login</button>
-  </RouterLink>
-  <RouterLink class="router" to="/signup" v-if="authStore.currentUser === null">
-    <button class="signUp">Sign Up</button>
-  </RouterLink>
+  <img
+      class="backgroundImage"
+      src="https://img.freepik.com/premium-photo/group-monkeys-standing-each-other-street-with-man-background-generative-ai_97167-5808.jpg"
+      alt="Background image featuring a bunch of monkeys"
+    />
 </template>
 
 <script>
@@ -58,7 +59,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .backgroundImage {
   position: fixed;
   top: 0;
@@ -70,5 +71,61 @@ export default {
   background-repeat: no-repeat;
   opacity: 0.5;
   z-index: -1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.logo-router {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.logo {
+  height: 30px; /* Smaller logo size */
+  margin-right: 10px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.login,.signUp {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.posts,.account-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+  
+}
+
+.content-start {
+  margin-top: 60px; 
 }
 </style>
