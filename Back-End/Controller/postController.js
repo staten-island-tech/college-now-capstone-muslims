@@ -13,13 +13,15 @@ const multerOptions = {
     //can also set limit in multer
     const isPhoto = file.mimetype.startsWith("image/");
     if (isPhoto) {
-      cb(null, true);
-    } else {
-      cb(new Error("That filetype is not allowed"), false);
-    }
+      next(null, true);
+    } else
+      ({
+        message: "That filetype is not allowed",
+      }),
+        false;
   },
 };
-exports.upload = multer(multerOptions).single("photo"); 
+exports.upload = multer(multerOptions).single("photo");
 
 exports.createPost = async (req, res) => {
   try {

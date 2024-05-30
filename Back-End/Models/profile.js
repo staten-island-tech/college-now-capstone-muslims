@@ -17,7 +17,7 @@ const profileSchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
-  contactInfo: {
+  phoneNumber: {
     type: String,
     required: true,
   },

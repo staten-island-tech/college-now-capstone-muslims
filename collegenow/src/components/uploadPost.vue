@@ -34,10 +34,10 @@
 <script>
 import Dialog from "primevue/dialog";
 import { usePostStore } from "@/stores/post";
+const postStore = usePostStore();
 export default {
   name: "uploadPost",
   setup() {
-    const postStore = usePostStore();
     return { postStore };
   },
   components: {
@@ -47,7 +47,6 @@ export default {
     return {
       petName: "",
       petAge: "",
-      ownerName: "",
       phoneNumber: "",
       description: "",
       selectedAnimal: "",
@@ -73,12 +72,10 @@ export default {
       const formData = new FormData();
       formData.append("petName", this.petName);
       formData.append("petAge", this.petAge);
-      formData.append("ownerName", "sdadsdasas");
       formData.append("phoneNumber", this.phoneNumber);
       formData.append("description", this.description);
       formData.append("animalType", this.selectedAnimal);
       formData.append("photo", this.postImage);
-
       try {
         const res = await fetch("http://localhost:3000/createPost", {
           method: "POST",
@@ -96,13 +93,12 @@ export default {
       } catch (error) {
         console.error("Error creating post: ", error);
       }
-      this.submitPost()
+      this.submitPost();
     },
     submitPost() {
       this.visible = false;
       this.petName = "";
       this.petAge = "";
-      this.ownerName = "";
       this.phoneNumber = "";
       this.description = "";
       this.selectedAnimal = "";

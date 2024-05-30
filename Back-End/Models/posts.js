@@ -17,11 +17,6 @@ const postSchema = new Schema({
     trim: true,
     required: true,
   },
-  ownerName: {
-    type: String,
-    trim: true,
-    required: true,
-  },
   postImage: {
     type: String,
     required: true,
@@ -31,7 +26,7 @@ const postSchema = new Schema({
     trim: true,
     required: true,
   },
-  animalType: {
+  selectedAnimal: {
     type: String,
     trim: true,
     required: true,

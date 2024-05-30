@@ -1,7 +1,6 @@
 <template>
   <div class="post">
     <h2>{{ Name }}</h2>
-    <h2>{{ ownerName }}</h2>
     <p>{{ number }}</p>
     <p>{{ Description }}</p>
     <p>{{ email }}</p>
