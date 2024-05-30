@@ -1,5 +1,5 @@
 <template>
-  <accountButton @accountClick="" />
+  <accountButton />
   <div class="logo">
     <RouterLink class="router" to="/"
       ><button>
@@ -70,7 +70,12 @@ import Avatar from "primevue/avatar";
 import "primeicons/primeicons.css";
 import Dropdown from "../components/DropDownMenu.vue";
 import accountButton from "../components/accountButton.vue";
+import { useProfileStore } from "@/stores/profile";
+const profileStore = useProfileStore();
 export default {
+  mounted() {
+    this.populate();
+  },
   components: {
     Avatar,
     Dropdown,
@@ -96,6 +101,14 @@ export default {
     },
   },
   methods: {
+    async populate() {
+      let res = await fetch("http://localhost:3000/signup");
+      let data = await res.json();
+      this.tempLocation = data.state;
+      this.tempEmail = data.email;
+      this.tempUsername = data.username;
+      this.console.log(data);
+    },
     handleProfilePictureUpload(event) {
       const file = event.target.files[0];
       if (file) {

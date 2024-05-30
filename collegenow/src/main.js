@@ -11,9 +11,10 @@ import Dialog from "primevue/dialog";
 import FileUpload from "primevue/fileupload";
 import Avatar from "primevue/avatar";
 import Divider from "primevue/divider";
-
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 const app = createApp(App);
-
+gsap.registerPlugin(ScrollTrigger);
 app.use(PrimeVue);
 app.component("Divider", Divider);
 app.component("Dialog", Dialog);
