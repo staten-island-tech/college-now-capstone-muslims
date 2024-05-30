@@ -41,7 +41,7 @@ export default {
       const authStore = useAuthStore();
       let postUsername = authStore.username
       try {
-        const response = await fetch('http://localhost:3000/posts/${calorieData}', {
+        const response = await fetch(`http://localhost:3000/posts/${postUsername}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

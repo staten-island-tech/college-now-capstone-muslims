@@ -4,11 +4,11 @@ const profileController = require("../Controller/profileController");
 const postController = require("../Controller/postController");
 const authController = require("../Controller/authController");
 
-router.post("/createProfile", profileController.createProfile);
+router.post("/createProfile", profileController.upload, profileController.createProfile);
 router.patch("/updateProfile/:id", profileController.updateProfile);
 
-router.post("/createPost", postController.createPost);
-router.get("/posts", postController.getPost);
+router.post("/createPost", postController.upload, postController.createPost);
+router.get("/posts/:username", postController.getPost);
 router.delete("/deletePost/:id", postController.deletePost);
 
 router.post("/signup", authController.signup);
