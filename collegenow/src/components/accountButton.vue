@@ -55,7 +55,7 @@ export default {
     },
     logOut() {
       authStore.clearUser();
-      router.push("/");
+      console.log("I got clicked");
     },
   },
   data() {

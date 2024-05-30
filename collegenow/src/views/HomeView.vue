@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     checkUser() {
-      if (authStore.currentUser === null) {
+      if (!authStore.isAuthenticated) {
         router.push("login");
       }
     },
